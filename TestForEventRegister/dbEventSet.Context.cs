@@ -13,10 +13,10 @@ namespace TestForEventRegister
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dbEventRegistEntities : DbContext
+    public partial class dbEventSet : DbContext
     {
-        public dbEventRegistEntities()
-            : base("name=dbEventRegistEntities")
+        public dbEventSet()
+            : base("name=dbEventSet")
         {
         }
     
@@ -25,8 +25,7 @@ namespace TestForEventRegister
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tEvent> tEvent { get; set; }
         public virtual DbSet<tEventRegister> tEventRegister { get; set; }
-        public virtual DbSet<tEventSetRegister> tEventSetRegister { get; set; }
+        public virtual DbSet<tEventSet> tEventSet { get; set; }
     }
 }

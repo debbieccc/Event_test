@@ -15,7 +15,7 @@ namespace TestForEventRegister
     public partial class tEventRegister
     {
         public int fEventRegisterId { get; set; }
-        public Nullable<int> fEventId { get; set; }
+        public string fEventId { get; set; }
         public string fUserId { get; set; }
         public Nullable<int> fnumAttendPeople { get; set; }
         public string ferName { get; set; }

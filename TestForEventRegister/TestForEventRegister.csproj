@@ -128,34 +128,32 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BackEvent2Controller.cs" />
     <Compile Include="Controllers\BackEventController.cs" />
-    <Compile Include="dbEventRegist.Context.cs">
+    <Compile Include="dbEventSet.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbEventRegist.Context.tt</DependentUpon>
+      <DependentUpon>dbEventSet.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="dbEventRegist.cs">
+    <Compile Include="dbEventSet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbEventRegist.tt</DependentUpon>
+      <DependentUpon>dbEventSet.tt</DependentUpon>
     </Compile>
-    <Compile Include="dbEventRegist.Designer.cs">
+    <Compile Include="dbEventSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbEventRegist.edmx</DependentUpon>
+      <DependentUpon>dbEventSet.edmx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tEvent.cs">
-      <DependentUpon>dbEventRegist.tt</DependentUpon>
-    </Compile>
     <Compile Include="tEventRegister.cs">
-      <DependentUpon>dbEventRegist.tt</DependentUpon>
+      <DependentUpon>dbEventSet.tt</DependentUpon>
     </Compile>
-    <Compile Include="tEventSetRegister.cs">
-      <DependentUpon>dbEventRegist.tt</DependentUpon>
+    <Compile Include="tEventSet.cs">
+      <DependentUpon>dbEventSet.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -163,15 +161,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="dbEventRegist.Context.tt">
+    <Content Include="dbEventSet.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbEventRegist.edmx</DependentUpon>
-      <LastGenOutput>dbEventRegist.Context.cs</LastGenOutput>
+      <DependentUpon>dbEventSet.edmx</DependentUpon>
+      <LastGenOutput>dbEventSet.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="dbEventRegist.tt">
+    <Content Include="dbEventSet.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbEventRegist.edmx</DependentUpon>
-      <LastGenOutput>dbEventRegist.cs</LastGenOutput>
+      <DependentUpon>dbEventSet.edmx</DependentUpon>
+      <LastGenOutput>dbEventSet.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -181,12 +179,12 @@
     <Content Include="js\setRegisForm.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="dbEventRegist.edmx">
+    <EntityDeploy Include="dbEventSet.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbEventRegist.Designer.cs</LastGenOutput>
+      <LastGenOutput>dbEventSet.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="dbEventRegist.edmx.diagram">
-      <DependentUpon>dbEventRegist.edmx</DependentUpon>
+    <Content Include="dbEventSet.edmx.diagram">
+      <DependentUpon>dbEventSet.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -216,6 +214,8 @@
     <Content Include="Views\BackEvent\RegistertDetail.cshtml" />
     <Content Include="Views\BackEvent\SetRegistForm.cshtml" />
     <Content Include="Views\BackEvent\SetRegistForm2.cshtml" />
+    <Content Include="Views\BackEvent2\Event_B.cshtml" />
+    <Content Include="Views\BackEvent2\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
