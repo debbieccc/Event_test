@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,11 +9,27 @@ namespace TestForEventRegister.Controllers
 {
     public class BackEvent2Controller : Controller
     {
+        dbEventSet db = new dbEventSet();
+
         public ActionResult Event_B()
         {
-            dbEventSet db = new dbEventSet();
-            var events = from t in (new dbEventSet()).tEventSet
-                         select t;
+            IQueryable<tEventSet> events = null;
+            string keyword = Request.Form["txtKeyword"];
+            if (string.IsNullOrEmpty(keyword))
+            {
+                events = from p in (new dbEventSet()).tEventSet
+                           select p;
+            }
+
+            else
+            {
+                events = from p in (new dbEventSet()).tEventSet
+                         where p.fEventTitle.Contains(keyword)
+                           select p;
+            }
+
+            //var events = from t in (new dbEventSet()).tEventSet
+            //             select t;
             return View(events);
         }
         public ActionResult Create()
@@ -23,10 +40,17 @@ namespace TestForEventRegister.Controllers
         [HttpPost]
         public ActionResult Create(tEventSet p)
         {
-            dbEventSet db = new dbEventSet();            
+           if(p.fImage != null)
+            {
+                string photoName = Guid.NewGuid().ToString() + Path.GetExtension(p.fImage.FileName);
+                var path = Path.Combine(Server.MapPath("~/image/event/"), photoName);
+                p.fImage.SaveAs(path);
+                p.fEventImgPath = "../image/event/" + photoName;
+            }          
             db.tEventSet.Add(p);
             db.SaveChanges();
             return RedirectToAction("Event_B");
+                                 
         }       
 
         public ActionResult Edit(int? id)
@@ -34,7 +58,7 @@ namespace TestForEventRegister.Controllers
             if (id == null)
                 return RedirectToAction("Event_B");
 
-            dbEventSet db = new dbEventSet();
+         //   dbEventSet db = new dbEventSet();
             tEventSet x = db.tEventSet.FirstOrDefault(m => m.fEventId == id);
             return View(x);
         }
@@ -44,7 +68,7 @@ namespace TestForEventRegister.Controllers
         {
             if (string.IsNullOrEmpty(p.fEventTitle))
                 return RedirectToAction("Event_B");
-            dbEventSet db = new dbEventSet();
+        //    dbEventSet db = new dbEventSet();
             tEventSet editevent = db.tEventSet.FirstOrDefault(m => m.fEventId == p.fEventId);
             if (editevent != null)
             {
@@ -65,18 +89,42 @@ namespace TestForEventRegister.Controllers
                 editevent.fEventEndDate_R = p.fEventEndDate_R;
                 editevent.fEventEndTime_R = p.fEventEndTime_R;
                 editevent.fRemark = p.fRemark;
+                
                 db.SaveChanges();
             }
             return RedirectToAction("Event_B");
         }
 
-
-        public ActionResult RegistertDetail()
+        public ActionResult Delete(int? Id)
         {
-            dbEventSet db = new dbEventSet();
-            var RegistertPpl = from t in (new dbEventSet()).tEventRegister
-                               select t;
-            return View(RegistertPpl);
+            if (Id == null)
+            {
+                return RedirectToAction("Event_B");
+            }
+            tEventSet t = db.tEventSet.FirstOrDefault(x => x.fEventId == Id);
+            if (t != null)
+            {
+                db.tEventSet.Remove(t);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Event_B");
         }
+
+        public ActionResult RegistertDetail(int? Id)
+        {
+            if (Id == null)
+            {
+                return RedirectToAction("Event_B");
+            }            
+           // tEventRegister t = db.tEventRegister.FirstOrDefault(x => x.fEventId == Id);
+            
+            var eventRegisterts = from t in (new dbEventSet()).tEventRegister
+                                  where t.fEventId == Id
+                         select t;
+            return View(eventRegisterts);
+        }
+     
+        
+
     }
 }

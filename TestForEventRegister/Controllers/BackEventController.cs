@@ -29,7 +29,7 @@
 //            return RedirectToAction("SetRegistForm2");
 //        }
 
-        
+
 //        //[HttpPost]
 //        //public ActionResult SetRegistForm2(tEventSetRegister p)
 //        //{
@@ -97,7 +97,7 @@
 //            return RedirectToAction("Event_B");
 //        }
 
-     
+
 
 
 //        public ActionResult RegistertDetail()

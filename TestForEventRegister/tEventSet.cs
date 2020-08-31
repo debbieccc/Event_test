@@ -11,7 +11,8 @@ namespace TestForEventRegister
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class tEventSet
     {
         public int fEventId { get; set; }
@@ -23,6 +24,7 @@ namespace TestForEventRegister
         public string fEventEndDate { get; set; }
         public string fEventEndTime { get; set; }
         public string fEventImgPath { get; set; }
+        public HttpPostedFileBase fImage { get; set; }
         public string fEventLocation { get; set; }
         public string fEventDescription { get; set; }
         public Nullable<int> fEventFeeOrFree { get; set; }
@@ -42,7 +44,7 @@ namespace TestForEventRegister
         public Nullable<int> ferIdentity { get; set; }
         public Nullable<int> ferOccupation { get; set; }
         public Nullable<int> ferVeganOrNot { get; set; }
-        public Nullable<int> ferOtherColumn1 { get; set; }
+        public string ferOtherColumn1 { get; set; }
         public string ferOtherColumn2 { get; set; }
         public string ferOtherColumn3 { get; set; }
         public string ferOtherColumn4 { get; set; }

@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BackEvent2Controller.cs" />
     <Compile Include="Controllers\BackEventController.cs" />
+    <Compile Include="Controllers\EventSignUpController.cs" />
     <Compile Include="dbEventSet.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -161,6 +162,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\event.css" />
+    <Content Include="css\event_B.css" />
+    <Content Include="css\frontPage.css" />
+    <Content Include="css\package.css" />
+    <Content Include="css\package_B.css" />
     <Content Include="dbEventSet.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbEventSet.edmx</DependentUpon>
@@ -172,9 +178,21 @@
       <LastGenOutput>dbEventSet.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="fontawesome\all.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\1080x540.png" />
+    <Content Include="image\event\bbq.jpg" />
+    <Content Include="image\event\beef.jpg" />
+    <Content Include="image\event\volunteer.jpg" />
+    <Content Include="image\event\yoga.png" />
+    <Content Include="image\event\yoga_signup.png" />
+    <Content Include="image\package\mail.png" />
+    <Content Include="image\package\mail_received.png" />
+    <Content Include="image\package\package.png" />
+    <Content Include="image\package\package_received.png" />
+    <Content Include="image\tennis.jpg" />
     <Content Include="js\setRegisForm2.js" />
     <Content Include="js\setRegisForm.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -208,14 +226,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\BackEvent\Create.cshtml" />
-    <Content Include="Views\BackEvent\Edit.cshtml" />
-    <Content Include="Views\BackEvent\Event_B.cshtml" />
-    <Content Include="Views\BackEvent\RegistertDetail.cshtml" />
-    <Content Include="Views\BackEvent\SetRegistForm.cshtml" />
-    <Content Include="Views\BackEvent\SetRegistForm2.cshtml" />
     <Content Include="Views\BackEvent2\Event_B.cshtml" />
     <Content Include="Views\BackEvent2\Create.cshtml" />
+    <Content Include="Views\EventSignUp\Event.cshtml" />
+    <Content Include="Views\BackEvent2\Edit.cshtml" />
+    <Content Include="Views\BackEvent2\RegistertDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

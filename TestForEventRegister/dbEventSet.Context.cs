@@ -25,7 +25,7 @@ namespace TestForEventRegister
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tEventRegister> tEventRegister { get; set; }
         public virtual DbSet<tEventSet> tEventSet { get; set; }
+        public virtual DbSet<tEventRegister> tEventRegister { get; set; }
     }
 }

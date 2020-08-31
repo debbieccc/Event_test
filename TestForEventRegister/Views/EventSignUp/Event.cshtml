@@ -1,0 +1,120 @@
+﻿@model IEnumerable<TestForEventRegister.tEventSet>
+
+@{
+    ViewBag.Title = "Event";
+}
+<link rel="stylesheet" href="../../fontawesome/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+<link rel="stylesheet" href="../../css/event.css">
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<main class="container mt-4">
+    <div class="smalltitle">
+        <h2><b>｜　社區活動　｜</b></h2>
+    </div>
+    <div class="searchbar">
+        <form class="form-inline my-2 my-lg-0 ">
+            <div class="">
+                <label>
+                    <select class="form-control_select mr-sm-2">
+                        <option value="allCategory">分類</option>
+                        <option value="sport">運動</option>
+                        <option value="lesson">課程 </option>
+                        <option value="buytogether">團購</option>
+                        <option value="gathering">聚會</option>
+                        <option value="buytogether">招募</option>
+                        <option value="other">其他</option>
+                    </select>
+                </label>
+            </div>
+            <input class="form-control_1 mr-sm-2" type="search" placeholder="請輸入關鍵字" aria-label="Search">
+            <span> 日期：</span>
+            <input class="form-control_date mr-sm-2" id="datepicker" type="date" placeholder="請選擇日期"
+                   aria-label="Search"> <span> 到 &nbsp;</span>
+            <input class="form-control_date mr-sm-2" id="datepicker" type="date" placeholder="請選擇日期"
+                   aria-label="Search">
+            <button type="button" class="btn btn-info"> <i class="fa fa-search"></i>搜尋</button>
+        </form>
+    </div>
+    <div class="row">
+        <div class="orderby mt-4">
+            排序方式：
+            <label>
+                <select class="form-control_select mr-sm-2" style="width: 120px">
+                    <option value="descend">由近到遠</option>
+                    <option value="Ascend ">由遠到近</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="orderby mt-4">
+            <label>
+                <select class="form-control_select mr-sm-2">
+                    <option value="choose">費用</option>
+                    <option value="free">免費</option>
+                    <option value="fee">付費</option>
+                </select>
+            </label>
+        </div>
+
+    </div>
+  
+    <div class="cards container row">
+        @foreach (var item in Model)
+        {
+        <div class="card card1  col-md-3">
+            <div> @Html.DisplayFor(modelItem => item.fEventId)</div>
+            <div class="card__img"></div>
+            <a href="#" class="card_link">
+                <div class="card__img_hover"></div>
+            </a>
+            <div class="card__info">
+
+                <span class="card__category"><i class="fa fa-clock-o"></i>   @Html.DisplayFor(modelItem => item.fEventFromDay) -   @Html.DisplayFor(modelItem => item.fEventEndDate)</span>
+                <a class="link" href="#">
+                    <h5 class="card__title"> @Html.DisplayFor(modelItem => item.fEventTitle)</h5>
+                </a>
+                <span class="card__by">by <a href="#" class="card__author" title="author"> @Html.DisplayFor(modelItem => item.ferUserId)</a></span>
+            </div>
+            @*<div>費用：   @Html.DisplayFor(modelItem => item.fEventFeeOrFree)，@Html.DisplayFor(modelItem => item.fEventFee)</div>*@
+            <div class="categoryhashtag d-flex justify-content-between">
+                <span class="categoryhashtag">　<i class="fa fa-hashtag"></i>  @Html.DisplayFor(modelItem => item.fCategory)</span>
+                <span class="followup_yes">關注</span>
+            </div>
+        </div>
+        }
+    </div>
+</main>
+
+
+@*<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr class="row">
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventImgPath)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventFeeOrFree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventFee)
+        </tr>
+        </tr>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    }
+
+    @*</table>*@

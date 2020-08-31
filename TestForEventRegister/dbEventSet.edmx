@@ -10,14 +10,14 @@
             <PropertyRef Name="fEventRegisterId" />
           </Key>
           <Property Name="fEventRegisterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fEventId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fEventId" Type="int" />
           <Property Name="fUserId" Type="nvarchar" MaxLength="10" />
           <Property Name="fnumAttendPeople" Type="int" />
           <Property Name="ferName" Type="nvarchar" MaxLength="10" />
           <Property Name="ferPhone" Type="nvarchar" MaxLength="10" />
           <Property Name="ferEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="ferGender" Type="nvarchar" MaxLength="4" />
-          <Property Name="ferBirthday" Type="date" />
+          <Property Name="ferBirthday" Type="nvarchar" MaxLength="20" />
           <Property Name="ferIdentity" Type="nvarchar" MaxLength="10" />
           <Property Name="ferOccupation" Type="nvarchar" MaxLength="30" />
           <Property Name="ferVeganOrNot" Type="int" />
@@ -59,7 +59,7 @@
           <Property Name="ferIdentity" Type="int" />
           <Property Name="ferOccupation" Type="int" />
           <Property Name="ferVeganOrNot" Type="int" />
-          <Property Name="ferOtherColumn1" Type="int" />
+          <Property Name="ferOtherColumn1" Type="nvarchar(max)" />
           <Property Name="ferOtherColumn2" Type="nvarchar(max)" />
           <Property Name="ferOtherColumn3" Type="nvarchar(max)" />
           <Property Name="ferOtherColumn4" Type="nvarchar(max)" />
@@ -73,33 +73,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestForEventRegisterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tEventRegister">
-          <Key>
-            <PropertyRef Name="fEventRegisterId" />
-          </Key>
-          <Property Name="fEventRegisterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fEventId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="fUserId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="fnumAttendPeople" Type="Int32" />
-          <Property Name="ferName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ferPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ferEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ferGender" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="ferBirthday" Type="DateTime" Precision="0" />
-          <Property Name="ferIdentity" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ferOccupation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ferVeganOrNot" Type="Int32" />
-          <Property Name="ferOtherColumn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ferOtherColumn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ferOtherColumn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ferOtherColumn4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ferOtherColumn5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
+        <EntityContainer Name="dbEventSet" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tEventSet" EntityType="TestForEventRegisterModel.tEventSet" />
+          <EntitySet Name="tEventRegister" EntityType="TestForEventRegisterModel.tEventRegister" />
+        </EntityContainer>
         <EntityType Name="tEventSet">
           <Key>
             <PropertyRef Name="fEventId" />
           </Key>
-          <Property Name="fEventId" Type="Int32" Nullable="false" />
+          <Property Name="fEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fUserId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="fEventTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fCategory" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -127,81 +109,99 @@
           <Property Name="ferIdentity" Type="Int32" />
           <Property Name="ferOccupation" Type="Int32" />
           <Property Name="ferVeganOrNot" Type="Int32" />
-          <Property Name="ferOtherColumn1" Type="Int32" />
+          <Property Name="ferOtherColumn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ferOtherColumn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ferOtherColumn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ferOtherColumn4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ferOtherColumn5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="dbEventSet" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tEventRegister" EntityType="Self.tEventRegister" />
-          <EntitySet Name="tEventSet" EntityType="Self.tEventSet" />
-        </EntityContainer>
+        <EntityType Name="tEventRegister">
+          <Key>
+            <PropertyRef Name="fEventRegisterId" />
+          </Key>
+          <Property Name="fEventRegisterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fEventId" Type="Int32" />
+          <Property Name="fUserId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fnumAttendPeople" Type="Int32" />
+          <Property Name="ferName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ferPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ferEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ferGender" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ferBirthday" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ferIdentity" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ferOccupation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ferVeganOrNot" Type="Int32" />
+          <Property Name="ferOtherColumn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ferOtherColumn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ferOtherColumn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ferOtherColumn4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ferOtherColumn5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TestForEventRegisterModelStoreContainer" CdmEntityContainer="dbEventSet">
-          <EntitySetMapping Name="tEventRegister">
-            <EntityTypeMapping TypeName="TestForEventRegisterModel.tEventRegister">
-              <MappingFragment StoreEntitySet="tEventRegister">
-                <ScalarProperty Name="fEventRegisterId" ColumnName="fEventRegisterId" />
-                <ScalarProperty Name="fEventId" ColumnName="fEventId" />
-                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
-                <ScalarProperty Name="fnumAttendPeople" ColumnName="fnumAttendPeople" />
-                <ScalarProperty Name="ferName" ColumnName="ferName" />
-                <ScalarProperty Name="ferPhone" ColumnName="ferPhone" />
-                <ScalarProperty Name="ferEmail" ColumnName="ferEmail" />
-                <ScalarProperty Name="ferGender" ColumnName="ferGender" />
-                <ScalarProperty Name="ferBirthday" ColumnName="ferBirthday" />
-                <ScalarProperty Name="ferIdentity" ColumnName="ferIdentity" />
-                <ScalarProperty Name="ferOccupation" ColumnName="ferOccupation" />
-                <ScalarProperty Name="ferVeganOrNot" ColumnName="ferVeganOrNot" />
-                <ScalarProperty Name="ferOtherColumn1" ColumnName="ferOtherColumn1" />
-                <ScalarProperty Name="ferOtherColumn2" ColumnName="ferOtherColumn2" />
-                <ScalarProperty Name="ferOtherColumn3" ColumnName="ferOtherColumn3" />
-                <ScalarProperty Name="ferOtherColumn4" ColumnName="ferOtherColumn4" />
-                <ScalarProperty Name="ferOtherColumn5" ColumnName="ferOtherColumn5" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tEventSet">
             <EntityTypeMapping TypeName="TestForEventRegisterModel.tEventSet">
               <MappingFragment StoreEntitySet="tEventSet">
-                <ScalarProperty Name="fEventId" ColumnName="fEventId" />
-                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
-                <ScalarProperty Name="fEventTitle" ColumnName="fEventTitle" />
-                <ScalarProperty Name="fCategory" ColumnName="fCategory" />
-                <ScalarProperty Name="fEventFromDay" ColumnName="fEventFromDay" />
-                <ScalarProperty Name="fEventFromTime" ColumnName="fEventFromTime" />
-                <ScalarProperty Name="fEventEndDate" ColumnName="fEventEndDate" />
-                <ScalarProperty Name="fEventEndTime" ColumnName="fEventEndTime" />
-                <ScalarProperty Name="fEventImgPath" ColumnName="fEventImgPath" />
-                <ScalarProperty Name="fEventLocation" ColumnName="fEventLocation" />
-                <ScalarProperty Name="fEventDescription" ColumnName="fEventDescription" />
-                <ScalarProperty Name="fEventFeeOrFree" ColumnName="fEventFeeOrFree" />
-                <ScalarProperty Name="fEventFee" ColumnName="fEventFee" />
-                <ScalarProperty Name="fEventFromDay_R" ColumnName="fEventFromDay_R" />
-                <ScalarProperty Name="fEventFromTime_R" ColumnName="fEventFromTime_R" />
-                <ScalarProperty Name="fEventEndDate_R" ColumnName="fEventEndDate_R" />
-                <ScalarProperty Name="fEventEndTime_R" ColumnName="fEventEndTime_R" />
-                <ScalarProperty Name="fRemark" ColumnName="fRemark" />
-                <ScalarProperty Name="ferUserId" ColumnName="ferUserId" />
-                <ScalarProperty Name="fnumAttendPeople" ColumnName="fnumAttendPeople" />
-                <ScalarProperty Name="ferName" ColumnName="ferName" />
-                <ScalarProperty Name="ferPhone" ColumnName="ferPhone" />
-                <ScalarProperty Name="ferEmail" ColumnName="ferEmail" />
-                <ScalarProperty Name="ferGender" ColumnName="ferGender" />
-                <ScalarProperty Name="ferBirthday" ColumnName="ferBirthday" />
-                <ScalarProperty Name="ferIdentity" ColumnName="ferIdentity" />
-                <ScalarProperty Name="ferOccupation" ColumnName="ferOccupation" />
-                <ScalarProperty Name="ferVeganOrNot" ColumnName="ferVeganOrNot" />
-                <ScalarProperty Name="ferOtherColumn1" ColumnName="ferOtherColumn1" />
-                <ScalarProperty Name="ferOtherColumn2" ColumnName="ferOtherColumn2" />
-                <ScalarProperty Name="ferOtherColumn3" ColumnName="ferOtherColumn3" />
-                <ScalarProperty Name="ferOtherColumn4" ColumnName="ferOtherColumn4" />
                 <ScalarProperty Name="ferOtherColumn5" ColumnName="ferOtherColumn5" />
+                <ScalarProperty Name="ferOtherColumn4" ColumnName="ferOtherColumn4" />
+                <ScalarProperty Name="ferOtherColumn3" ColumnName="ferOtherColumn3" />
+                <ScalarProperty Name="ferOtherColumn2" ColumnName="ferOtherColumn2" />
+                <ScalarProperty Name="ferOtherColumn1" ColumnName="ferOtherColumn1" />
+                <ScalarProperty Name="ferVeganOrNot" ColumnName="ferVeganOrNot" />
+                <ScalarProperty Name="ferOccupation" ColumnName="ferOccupation" />
+                <ScalarProperty Name="ferIdentity" ColumnName="ferIdentity" />
+                <ScalarProperty Name="ferBirthday" ColumnName="ferBirthday" />
+                <ScalarProperty Name="ferGender" ColumnName="ferGender" />
+                <ScalarProperty Name="ferEmail" ColumnName="ferEmail" />
+                <ScalarProperty Name="ferPhone" ColumnName="ferPhone" />
+                <ScalarProperty Name="ferName" ColumnName="ferName" />
+                <ScalarProperty Name="fnumAttendPeople" ColumnName="fnumAttendPeople" />
+                <ScalarProperty Name="ferUserId" ColumnName="ferUserId" />
+                <ScalarProperty Name="fRemark" ColumnName="fRemark" />
+                <ScalarProperty Name="fEventEndTime_R" ColumnName="fEventEndTime_R" />
+                <ScalarProperty Name="fEventEndDate_R" ColumnName="fEventEndDate_R" />
+                <ScalarProperty Name="fEventFromTime_R" ColumnName="fEventFromTime_R" />
+                <ScalarProperty Name="fEventFromDay_R" ColumnName="fEventFromDay_R" />
+                <ScalarProperty Name="fEventFee" ColumnName="fEventFee" />
+                <ScalarProperty Name="fEventFeeOrFree" ColumnName="fEventFeeOrFree" />
+                <ScalarProperty Name="fEventDescription" ColumnName="fEventDescription" />
+                <ScalarProperty Name="fEventLocation" ColumnName="fEventLocation" />
+                <ScalarProperty Name="fEventImgPath" ColumnName="fEventImgPath" />
+                <ScalarProperty Name="fEventEndTime" ColumnName="fEventEndTime" />
+                <ScalarProperty Name="fEventEndDate" ColumnName="fEventEndDate" />
+                <ScalarProperty Name="fEventFromTime" ColumnName="fEventFromTime" />
+                <ScalarProperty Name="fEventFromDay" ColumnName="fEventFromDay" />
+                <ScalarProperty Name="fCategory" ColumnName="fCategory" />
+                <ScalarProperty Name="fEventTitle" ColumnName="fEventTitle" />
+                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+                <ScalarProperty Name="fEventId" ColumnName="fEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEventRegister">
+            <EntityTypeMapping TypeName="TestForEventRegisterModel.tEventRegister">
+              <MappingFragment StoreEntitySet="tEventRegister">
+                <ScalarProperty Name="ferOtherColumn5" ColumnName="ferOtherColumn5" />
+                <ScalarProperty Name="ferOtherColumn4" ColumnName="ferOtherColumn4" />
+                <ScalarProperty Name="ferOtherColumn3" ColumnName="ferOtherColumn3" />
+                <ScalarProperty Name="ferOtherColumn2" ColumnName="ferOtherColumn2" />
+                <ScalarProperty Name="ferOtherColumn1" ColumnName="ferOtherColumn1" />
+                <ScalarProperty Name="ferVeganOrNot" ColumnName="ferVeganOrNot" />
+                <ScalarProperty Name="ferOccupation" ColumnName="ferOccupation" />
+                <ScalarProperty Name="ferIdentity" ColumnName="ferIdentity" />
+                <ScalarProperty Name="ferBirthday" ColumnName="ferBirthday" />
+                <ScalarProperty Name="ferGender" ColumnName="ferGender" />
+                <ScalarProperty Name="ferEmail" ColumnName="ferEmail" />
+                <ScalarProperty Name="ferPhone" ColumnName="ferPhone" />
+                <ScalarProperty Name="ferName" ColumnName="ferName" />
+                <ScalarProperty Name="fnumAttendPeople" ColumnName="fnumAttendPeople" />
+                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+                <ScalarProperty Name="fEventId" ColumnName="fEventId" />
+                <ScalarProperty Name="fEventRegisterId" ColumnName="fEventRegisterId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

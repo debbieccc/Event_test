@@ -15,14 +15,14 @@ namespace TestForEventRegister
     public partial class tEventRegister
     {
         public int fEventRegisterId { get; set; }
-        public string fEventId { get; set; }
+        public Nullable<int> fEventId { get; set; }
         public string fUserId { get; set; }
         public Nullable<int> fnumAttendPeople { get; set; }
         public string ferName { get; set; }
         public string ferPhone { get; set; }
         public string ferEmail { get; set; }
         public string ferGender { get; set; }
-        public Nullable<System.DateTime> ferBirthday { get; set; }
+        public string ferBirthday { get; set; }
         public string ferIdentity { get; set; }
         public string ferOccupation { get; set; }
         public Nullable<int> ferVeganOrNot { get; set; }
