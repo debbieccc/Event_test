@@ -4,6 +4,13 @@
     ViewBag.Title = "Create";
 }
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript" src="~/js/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/css/jquery.timepicker.css" />
+
 <style>
     * {
         font-family: 微軟正黑體;
@@ -91,28 +98,29 @@
         <div class="form-group">
             <div class="control-label col-md-2">活動開始日</div>
             <div class="col-md-10">
-                <input type="date" name="fEventFromDay" class="form-control">
+                <input type="text" id="fEventFromDay" name="fEventFromDay" class="form-control" autocomplete="off">
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2">活動開始時間</div>
             <div class="col-md-10">
-                <input type="time" name="fEventFromTime" class="form-control">
+                <input type="text" name="fEventFromTime" id="fEventFromTime" class="form-control" autocomplete="off">
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="control-label col-md-2">活動結束日</div>
             <div class="col-md-10">
-                <input type="date" name="fEventEndDate" class="form-control">
+                <input type="text" id="fEventEndDate" name="fEventEndDate" class="form-control" autocomplete="off">
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2">活動結束時間</div>
             <div class="col-md-10">
-                <input type="time" name="fEventEndTime" class="form-control">
+                <input type="text" name="fEventEndTime" class="form-control time ui-timepicker-input " autocomplete="off">
             </div>
         </div>
 
@@ -157,30 +165,30 @@
         </div>
 
         <div class="form-group">
-            <div class="control-label col-md-2">報名起始日</div>
+            <div class="control-label col-md-2" for="fEventFromDay_R">報名起始日</div>
             <div class="col-md-10">
-                <input type="date" name="fEventFromDay_R" class="form-control">
+                <input type="text" id="fEventFromDay_R" name="fEventFromDay_R" class="form-control">
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2">報名起始時間</div>
             <div class="col-md-10">
-                <input type="time" name="fEventFromTime_R" class="form-control">
+                <input type="time" id="fEventFromTime_R" name="fEventFromTime_R" class="form-control">
             </div>
         </div>
 
         <div class="form-group">
-            <div class="control-label col-md-2">報名截止日</div>
+            <div class="control-label col-md-2" for="fEventEndDate_R">報名截止日</div>
             <div class="col-md-10">
-                <input type="date" name="fEventEndDate_R" class="form-control">
+                <input type="text" id="fEventEndDate_R" name="fEventEndDate_R" class="form-control">
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2">報名截止時間</div>
             <div class="col-md-10">
-                <input type="time" name="fEventEndTime_R" class="form-control">
+                <input type="time" id="fEventEndTime_R" name="fEventEndTime_R" class="form-control">
             </div>
         </div>
 
@@ -382,9 +390,65 @@
     @Html.ActionLink("取消", "Event_B")
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
 <script src="~/js/setRegisForm2.js"></script>
+<script>
+    $(function () {
+        var fEventFromDay = $("#fEventFromDay").datepicker({
+            dateFormat: "yy/mm/dd",
+            minDate: "+3d",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+            .on("change", function () {
+                fEventEndDate.datepicker("option", "minDate", getDate(this));
+                fEventEndDate_R.datepicker("option", "maxDate", getDate(this));
+            });
+        var fEventEndDate = $("#fEventEndDate").datepicker({
+            dateFormat: "yy/mm/dd",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+            .on("change", function () {
+                fEventFromDay.datepicker("option", "maxDate", getDate(this));
+            });
+
+        var fEventFromDay_R = $("#fEventFromDay_R").datepicker({
+            dateFormat: "yy/mm/dd",
+            minDate: "today",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+
+        var fEventEndDate_R = $("#fEventEndDate_R").datepicker({
+            dateFormat: "yy/mm/dd",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+
+        function getDate(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate("yy/mm/dd", element.value);
+            } catch (error) {
+                date = null;
+            }
+            return date;
+        }
+        console.log($('#fEventFromTime'));
+        var fEventFromTime = $('#fEventFromTime').timepicker();
+    });
+
+    var s = $('#fEventFromTime').timepicker();
+
+    console.log(s);
+    console.log(fEventFromTime);
+
+
+
+</script>

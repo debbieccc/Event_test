@@ -123,8 +123,11 @@ namespace TestForEventRegister.Controllers
                          select t;
             return View(eventRegisterts);
         }
-     
-        
+
+        public ActionResult TestDate()
+        {
+            return View();
+        }
 
     }
 }
