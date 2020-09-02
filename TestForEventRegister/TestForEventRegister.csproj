@@ -128,7 +128,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BackEvent2Controller.cs" />
     <Compile Include="Controllers\BackEventController.cs" />
     <Compile Include="Controllers\EventSignUpController.cs" />
     <Compile Include="dbEventSet.Context.cs">
@@ -228,12 +227,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\BackEvent2\Event_B.cshtml" />
-    <Content Include="Views\BackEvent2\Create.cshtml" />
+    <Content Include="Views\BackEvent\Event_B.cshtml" />
+    <Content Include="Views\BackEvent\Create.cshtml" />
     <Content Include="Views\EventSignUp\Event.cshtml" />
-    <Content Include="Views\BackEvent2\Edit.cshtml" />
-    <Content Include="Views\BackEvent2\RegistertDetail.cshtml" />
-    <Content Include="Views\BackEvent2\TestDate.cshtml" />
+    <Content Include="Views\BackEvent\Edit.cshtml" />
+    <Content Include="Views\BackEvent\RegistertDetail.cshtml" />
+    <Content Include="Views\BackEvent\TestDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

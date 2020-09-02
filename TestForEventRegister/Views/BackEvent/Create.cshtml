@@ -47,7 +47,7 @@
 <h2>新增活動</h2>
 
 
-@using (Html.BeginForm("Create", "BackEvent2", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "BackEvent", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -84,12 +84,12 @@
             <div class="control-label col-md-2">分類</div>
             <div class="col-md-10">
                 <select name="fCategory" class="form-control">
-                    <option value="1">運動</option>
-                    <option value="2">課程</option>
-                    <option value="3">團購</option>
-                    <option value="4">聚會</option>
-                    <option value="5">招募</option>
-                    <option value="6">其他</option>
+                    <option value="運動">運動</option>
+                    <option value="課程">課程</option>
+                    <option value="團購">團購</option>
+                    <option value="聚會">聚會</option>
+                    <option value="招募">招募</option>
+                    <option value="其他">其他</option>
                 </select>
 
             </div>
@@ -105,7 +105,7 @@
         <div class="form-group">
             <div class="control-label col-md-2">活動開始時間</div>
             <div class="col-md-10">
-                <input type="text" name="fEventFromTime" id="fEventFromTime" class="form-control" autocomplete="off">
+                <input type="text" name="fEventFromTime" id="fEventFromTime" class="form-control time ui-timepicker-input" autocomplete="off">
             </div>
         </div>
 
@@ -120,7 +120,8 @@
         <div class="form-group">
             <div class="control-label col-md-2">活動結束時間</div>
             <div class="col-md-10">
-                <input type="text" name="fEventEndTime" class="form-control time ui-timepicker-input " autocomplete="off">
+                <input type="text" name="fEventEndTime" id="fEventEndTime" class="form-control time ui-timepicker-input" autocomplete="off">
+              
             </div>
         </div>
 
@@ -149,8 +150,8 @@
             <div class="control-label col-md-2">是否為付費活動</div>
             <div class="col-md-10">
                 <select name="fEventFeeOrFree" class="form-control">
-                    <option value="0">免費</option>
-                    <option value="1">付費</option>
+                    <option value="免費">免費</option>
+                    <option value="付費">付費</option>
                 </select>
             </div>
         </div>
@@ -167,28 +168,28 @@
         <div class="form-group">
             <div class="control-label col-md-2" for="fEventFromDay_R">報名起始日</div>
             <div class="col-md-10">
-                <input type="text" id="fEventFromDay_R" name="fEventFromDay_R" class="form-control">
+                <input type="text" id="fEventFromDay_R" name="fEventFromDay_R" class="form-control" autocomplete="off">
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2">報名起始時間</div>
             <div class="col-md-10">
-                <input type="time" id="fEventFromTime_R" name="fEventFromTime_R" class="form-control">
+                <input type="time" id="fEventFromTime_R" name="fEventFromTime_R" class="form-control" autocomplete="off">
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2" for="fEventEndDate_R">報名截止日</div>
             <div class="col-md-10">
-                <input type="text" id="fEventEndDate_R" name="fEventEndDate_R" class="form-control">
+                <input type="text" id="fEventEndDate_R" name="fEventEndDate_R" class="form-control" autocomplete="off">
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2">報名截止時間</div>
             <div class="col-md-10">
-                <input type="time" id="fEventEndTime_R" name="fEventEndTime_R" class="form-control">
+                <input type="time" id="fEventEndTime_R" name="fEventEndTime_R" class="form-control" autocomplete="off">
             </div>
         </div>
 
@@ -400,7 +401,7 @@
 <script>
     $(function () {
         var fEventFromDay = $("#fEventFromDay").datepicker({
-            dateFormat: "yy/mm/dd",
+            dateFormat: "yy-mm-dd",
             minDate: "+3d",
             changeMonth: true,
             numberOfMonths: 1
@@ -410,7 +411,7 @@
                 fEventEndDate_R.datepicker("option", "maxDate", getDate(this));
             });
         var fEventEndDate = $("#fEventEndDate").datepicker({
-            dateFormat: "yy/mm/dd",
+            dateFormat: "yy-mm-dd",
             changeMonth: true,
             numberOfMonths: 1
         })
@@ -419,14 +420,14 @@
             });
 
         var fEventFromDay_R = $("#fEventFromDay_R").datepicker({
-            dateFormat: "yy/mm/dd",
+            dateFormat: "yy-mm-dd",
             minDate: "today",
             changeMonth: true,
             numberOfMonths: 1
         })
 
         var fEventEndDate_R = $("#fEventEndDate_R").datepicker({
-            dateFormat: "yy/mm/dd",
+            dateFormat: "yy-mm-dd",
             changeMonth: true,
             numberOfMonths: 1
         })
@@ -440,15 +441,11 @@
             }
             return date;
         }
-        console.log($('#fEventFromTime'));
-        var fEventFromTime = $('#fEventFromTime').timepicker();
+     
     });
 
-    var s = $('#fEventFromTime').timepicker();
-
-    console.log(s);
-    console.log(fEventFromTime);
-
+    var fEventFromTime = $('#fEventFromTime').timepicker();
+    var fEventEndTime = $('#fEventEndTime').timepicker();
 
 
 </script>
