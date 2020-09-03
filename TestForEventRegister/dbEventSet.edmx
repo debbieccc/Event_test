@@ -16,7 +16,7 @@
           <Property Name="ferName" Type="nvarchar" MaxLength="10" />
           <Property Name="ferPhone" Type="nvarchar" MaxLength="10" />
           <Property Name="ferEmail" Type="nvarchar" MaxLength="50" />
-          <Property Name="ferGender" Type="nvarchar" MaxLength="4" />
+          <Property Name="ferGender" Type="nvarchar" MaxLength="10" />
           <Property Name="ferBirthday" Type="nvarchar" MaxLength="20" />
           <Property Name="ferIdentity" Type="nvarchar" MaxLength="10" />
           <Property Name="ferOccupation" Type="nvarchar" MaxLength="30" />
@@ -88,7 +88,7 @@
           <Property Name="ferName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ferPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ferEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ferGender" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ferGender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ferBirthday" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ferIdentity" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ferOccupation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />

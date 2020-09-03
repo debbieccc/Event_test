@@ -193,6 +193,7 @@
     <Content Include="image\package\package.png" />
     <Content Include="image\package\package_received.png" />
     <Content Include="image\tennis.jpg" />
+    <Content Include="js\eventsignup.js" />
     <Content Include="js\jquery.timepicker.min.js" />
     <Content Include="js\setRegisForm2.js" />
     <Content Include="js\setRegisForm.js" />

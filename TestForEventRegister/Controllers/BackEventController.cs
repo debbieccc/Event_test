@@ -118,9 +118,55 @@ namespace TestForEventRegister.Controllers
             if (Id == null)
             {
                 return RedirectToAction("Event_B");
-            }            
-           // tEventRegister t = db.tEventRegister.FirstOrDefault(x => x.fEventId == Id);
+            }
             
+            tEventSet set = db.tEventSet.FirstOrDefault(m => m.fEventId == Id);
+            ViewBag.fEventTitle = set.fEventTitle;
+
+            if (set.ferEmail == 1)
+            {
+                ViewBag.ferEmail = 1;
+            }
+            if (set.ferGender == 1)
+            {
+                ViewBag.ferGender = 1;
+            }
+            if (set.ferBirthday == 1)
+            {
+                ViewBag.ferBirthday = 1;
+            }
+            if (set.ferIdentity == 1)
+            {
+                ViewBag.ferIdentity = 1;
+            }
+            if (set.ferOccupation == 1)
+            {
+                ViewBag.ferOccupation = 1;
+            }
+            if (set.ferVeganOrNot == 1)
+            {
+                ViewBag.ferVeganOrNot = 1;
+            }
+            if (set.ferOtherColumn1 != null)
+            {
+                ViewBag.ferOtherColumn1 = set.ferOtherColumn1;
+            }
+            if (set.ferOtherColumn2 != null)
+            {
+                ViewBag.ferOtherColumn2 = set.ferOtherColumn2;
+            }
+            if (set.ferOtherColumn3 != null)
+            {
+                ViewBag.ferOtherColumn3 = set.ferOtherColumn3;
+            }
+            if (set.ferOtherColumn4 != null)
+            {
+                ViewBag.ferOtherColumn4 = set.ferOtherColumn4;
+            }
+            if (set.ferOtherColumn5 != null)
+            {
+                ViewBag.ferOtherColumn5 = set.ferOtherColumn5;
+            }
             var eventRegisterts = from t in (new dbEventSet()).tEventRegister
                                   where t.fEventId == Id
                          select t;

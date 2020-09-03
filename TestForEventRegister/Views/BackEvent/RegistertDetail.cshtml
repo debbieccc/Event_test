@@ -3,127 +3,132 @@
 @{
     ViewBag.Title = "RegistertDetail";
 }
-
-<h2>RegistertDetail</h2>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/js/eventsignup.js"></script>
+<h2>@ViewBag.fEventTitle</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.fEventRegisterId)
+            No.
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fEventId)
+            活動編號
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fUserId)
+            戶號
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fnumAttendPeople)
+            參加人數
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ferName)
+            姓名
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ferPhone)
+            聯絡電話
+        </th>
+        <th style="" class="ferEmail" showornot="@ViewBag.ferEmail">
+            電子郵件
+        </th>
+        <th style="" class="ferGender" showornot="@ViewBag.ferGender">
+            性別
+        </th>
+        <th  class="ferBirthday" showornot="@ViewBag.ferBirthday">
+            出生年月日
+        </th>
+        <th  class="ferIdentity" showornot="@ViewBag.ferIdentity">
+            身分證字號
+        </th>
+        <th  class="ferOccupation" showornot="@ViewBag.ferOccupation">
+            職業
+        </th>
+        <th  class="ferVeganOrNot" showornot="@ViewBag.ferVeganOrNot">
+            葷食/素食
+        </th>
+        <th  class="ferOtherColumn1" showornot="@ViewBag.ferOtherColumn1">
+            @ViewBag.ferOtherColumn1
+        </th>
+        <th  class="ferOtherColumn2" showornot="@ViewBag.ferOtherColumn2">
+            @ViewBag.ferOtherColumn2
+        </th>
+        <th  class="ferOtherColumn3" showornot="@ViewBag.ferOtherColumn3">
+            @ViewBag.ferOtherColumn3
+        </th>
+        <th  class="ferOtherColumn4" showornot="@ViewBag.ferOtherColumn4">
+            @ViewBag.ferOtherColumn4
+        </th>
+        <th class="ferOtherColumn5" showornot="@ViewBag.ferOtherColumn5">
+            @ViewBag.ferOtherColumn5
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ferEmail)
+
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferGender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferBirthday)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferIdentity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferOccupation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferVeganOrNot)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferOtherColumn1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferOtherColumn2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferOtherColumn3)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferOtherColumn4)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ferOtherColumn5)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fEventRegisterId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fEventId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fnumAttendPeople)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferPhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferGender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferBirthday)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferIdentity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferOccupation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferVeganOrNot)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferOtherColumn1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferOtherColumn2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferOtherColumn3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferOtherColumn4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ferOtherColumn5)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventRegisterId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fnumAttendPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ferName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ferPhone)
+            </td>
+            <td  class="ferEmail" showornot="@ViewBag.ferEmail">
+                @Html.DisplayFor(modelItem => item.ferEmail)
+            </td>
+            <td  class="ferGender" showornot="@ViewBag.ferGender">
+                @Html.DisplayFor(modelItem => item.ferGender)
+            </td>
+            <td  class="ferBirthday" showornot="@ViewBag.ferBirthday">
+                @Html.DisplayFor(modelItem => item.ferBirthday)
+            </td>
+            <td  class="ferIdentity" showornot="@ViewBag.ferIdentity">
+                @Html.DisplayFor(modelItem => item.ferIdentity)
+            </td>
+            <td class="ferOccupation" showornot="@ViewBag.ferOccupation">
+                @Html.DisplayFor(modelItem => item.ferOccupation)
+            </td>
+            <td  class="ferVeganOrNot" showornot="@ViewBag.ferVeganOrNot">
+                @Html.DisplayFor(modelItem => item.ferVeganOrNot)
+            </td>
+            <td  class="ferOtherColumn1" showornot="@ViewBag.ferOtherColumn1">
+                @Html.DisplayFor(modelItem => item.ferOtherColumn1)
+            </td>
+            <td  class="ferOtherColumn2" showornot="@ViewBag.ferOtherColumn2">
+                @Html.DisplayFor(modelItem => item.ferOtherColumn2)
+            </td>
+            <td  class="ferOtherColumn3" showornot="@ViewBag.ferOtherColumn3">
+                @Html.DisplayFor(modelItem => item.ferOtherColumn3)
+            </td>
+            <td  class="ferOtherColumn4" showornot="@ViewBag.ferOtherColumn4">
+                @Html.DisplayFor(modelItem => item.ferOtherColumn4)
+            </td>
+            <td  class="ferOtherColumn5" showornot="@ViewBag.ferOtherColumn5">
+                @Html.DisplayFor(modelItem => item.ferOtherColumn5)
+            </td>
+            <td>
+                @Html.ActionLink("編輯", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>
