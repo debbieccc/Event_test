@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Data;
+using OfficeOpenXml;
+
 
 namespace TestForEventRegister.Controllers
 {
@@ -176,6 +182,66 @@ namespace TestForEventRegister.Controllers
         public ActionResult TestDate()
         {
             return View();
+        }
+
+        public ActionResult Export()
+        {
+            //取出要匯出Excel的資料
+            List<tEventRegister> rangerList = db.tEventRegister.ToList();
+
+            //建立Excel
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            ExcelPackage ep = new ExcelPackage();
+
+            //建立第一個Sheet，後方為定義Sheet的名稱
+            ExcelWorksheet sheet = ep.Workbook.Worksheets.Add("FirstSheet");
+
+            int col = 1;    //欄:直的，因為要從第1欄開始，所以初始為1
+
+            //第1列是標題列 
+            //標題列部分，是取得DataAnnotations中的DisplayName，這樣比較一致，
+            //這也可避免後期有修改欄位名稱需求，但匯出excel標題忘了改的問題發生。
+            //取得做法可參考最後的參考連結。
+            sheet.Cells[1, col++].Value = "No.";
+            sheet.Cells[1, col++].Value = "活動編號";
+            sheet.Cells[1, col++].Value = "戶號";
+            sheet.Cells[1, col++].Value = "參加人數";
+            sheet.Cells[1, col++].Value = "姓名";
+            sheet.Cells[1, col++].Value = "聯絡電話";
+            sheet.Cells[1, col++].Value = "電子郵件";
+            sheet.Cells[1, col++].Value = "性別";
+            sheet.Cells[1, col++].Value = "出生年月日";
+            sheet.Cells[1, col++].Value = "身分證字號";
+            sheet.Cells[1, col++].Value = "職業";
+            sheet.Cells[1, col++].Value = "葷食/素食";            
+
+            //資料從第2列開始
+            int row = 2;    //列:橫的
+            foreach (tEventRegister item in rangerList)
+            {
+                col = 1;//每換一列，欄位要從1開始
+                        //指定Sheet的欄與列(欄名列號ex.A1,B20，在這邊都是用數字)，將資料寫入
+                sheet.Cells[row, col++].Value = item.fEventRegisterId;
+                sheet.Cells[row, col++].Value = item.fEventId;
+                sheet.Cells[row, col++].Value = item.fUserId;
+                sheet.Cells[row, col++].Value = item.fnumAttendPeople;
+                sheet.Cells[row, col++].Value = item.ferName;
+                sheet.Cells[row, col++].Value = item.ferPhone;
+                sheet.Cells[row, col++].Value = item.ferEmail;
+                sheet.Cells[row, col++].Value = item.ferGender;
+                sheet.Cells[row, col++].Value = item.ferBirthday;
+                sheet.Cells[row, col++].Value = item.ferIdentity;
+                sheet.Cells[row, col++].Value = item.ferOccupation;
+                sheet.Cells[row, col++].Value = item.ferVeganOrNot;
+                row++;
+            }
+
+            //因為ep.Stream是加密過的串流，故要透過SaveAs將資料寫到MemoryStream，在將MemoryStream使用FileStreamResult回傳到前端
+            MemoryStream fileStream = new MemoryStream();
+            ep.SaveAs(fileStream);
+            ep.Dispose();//如果這邊不下Dispose，建議此ep要用using包起來，但是要記得先將資料寫進MemoryStream在Dispose。
+            fileStream.Position = 0;//不重新將位置設為0，excel開啟後會出現錯誤
+            return File(fileStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "活動報名名單.xlsx");
         }
 
     }

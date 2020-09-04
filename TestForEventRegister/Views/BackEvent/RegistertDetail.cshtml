@@ -9,6 +9,7 @@
 <script src="~/js/eventsignup.js"></script>
 <h2>@ViewBag.fEventTitle</h2>
 
+@Html.ActionLink("匯出名單", "Export", new { }, new { style =  "margin: 3px 0 15px 0;", @class = "btn btn-success mb-3" })
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -38,28 +39,28 @@
         <th style="" class="ferGender" showornot="@ViewBag.ferGender">
             性別
         </th>
-        <th  class="ferBirthday" showornot="@ViewBag.ferBirthday">
+        <th class="ferBirthday" showornot="@ViewBag.ferBirthday">
             出生年月日
         </th>
-        <th  class="ferIdentity" showornot="@ViewBag.ferIdentity">
+        <th class="ferIdentity" showornot="@ViewBag.ferIdentity">
             身分證字號
         </th>
-        <th  class="ferOccupation" showornot="@ViewBag.ferOccupation">
+        <th class="ferOccupation" showornot="@ViewBag.ferOccupation">
             職業
         </th>
-        <th  class="ferVeganOrNot" showornot="@ViewBag.ferVeganOrNot">
+        <th class="ferVeganOrNot" showornot="@ViewBag.ferVeganOrNot">
             葷食/素食
         </th>
-        <th  class="ferOtherColumn1" showornot="@ViewBag.ferOtherColumn1">
+        <th class="ferOtherColumn1" showornot="@ViewBag.ferOtherColumn1">
             @ViewBag.ferOtherColumn1
         </th>
-        <th  class="ferOtherColumn2" showornot="@ViewBag.ferOtherColumn2">
+        <th class="ferOtherColumn2" showornot="@ViewBag.ferOtherColumn2">
             @ViewBag.ferOtherColumn2
         </th>
-        <th  class="ferOtherColumn3" showornot="@ViewBag.ferOtherColumn3">
+        <th class="ferOtherColumn3" showornot="@ViewBag.ferOtherColumn3">
             @ViewBag.ferOtherColumn3
         </th>
-        <th  class="ferOtherColumn4" showornot="@ViewBag.ferOtherColumn4">
+        <th class="ferOtherColumn4" showornot="@ViewBag.ferOtherColumn4">
             @ViewBag.ferOtherColumn4
         </th>
         <th class="ferOtherColumn5" showornot="@ViewBag.ferOtherColumn5">
@@ -91,37 +92,37 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ferPhone)
             </td>
-            <td  class="ferEmail" showornot="@ViewBag.ferEmail">
+            <td class="ferEmail" showornot="@ViewBag.ferEmail">
                 @Html.DisplayFor(modelItem => item.ferEmail)
             </td>
-            <td  class="ferGender" showornot="@ViewBag.ferGender">
+            <td class="ferGender" showornot="@ViewBag.ferGender">
                 @Html.DisplayFor(modelItem => item.ferGender)
             </td>
-            <td  class="ferBirthday" showornot="@ViewBag.ferBirthday">
+            <td class="ferBirthday" showornot="@ViewBag.ferBirthday">
                 @Html.DisplayFor(modelItem => item.ferBirthday)
             </td>
-            <td  class="ferIdentity" showornot="@ViewBag.ferIdentity">
+            <td class="ferIdentity" showornot="@ViewBag.ferIdentity">
                 @Html.DisplayFor(modelItem => item.ferIdentity)
             </td>
             <td class="ferOccupation" showornot="@ViewBag.ferOccupation">
                 @Html.DisplayFor(modelItem => item.ferOccupation)
             </td>
-            <td  class="ferVeganOrNot" showornot="@ViewBag.ferVeganOrNot">
+            <td class="ferVeganOrNot" showornot="@ViewBag.ferVeganOrNot">
                 @Html.DisplayFor(modelItem => item.ferVeganOrNot)
             </td>
-            <td  class="ferOtherColumn1" showornot="@ViewBag.ferOtherColumn1">
+            <td class="ferOtherColumn1" showornot="@ViewBag.ferOtherColumn1">
                 @Html.DisplayFor(modelItem => item.ferOtherColumn1)
             </td>
-            <td  class="ferOtherColumn2" showornot="@ViewBag.ferOtherColumn2">
+            <td class="ferOtherColumn2" showornot="@ViewBag.ferOtherColumn2">
                 @Html.DisplayFor(modelItem => item.ferOtherColumn2)
             </td>
-            <td  class="ferOtherColumn3" showornot="@ViewBag.ferOtherColumn3">
+            <td class="ferOtherColumn3" showornot="@ViewBag.ferOtherColumn3">
                 @Html.DisplayFor(modelItem => item.ferOtherColumn3)
             </td>
-            <td  class="ferOtherColumn4" showornot="@ViewBag.ferOtherColumn4">
+            <td class="ferOtherColumn4" showornot="@ViewBag.ferOtherColumn4">
                 @Html.DisplayFor(modelItem => item.ferOtherColumn4)
             </td>
-            <td  class="ferOtherColumn5" showornot="@ViewBag.ferOtherColumn5">
+            <td class="ferOtherColumn5" showornot="@ViewBag.ferOtherColumn5">
                 @Html.DisplayFor(modelItem => item.ferOtherColumn5)
             </td>
             <td>
