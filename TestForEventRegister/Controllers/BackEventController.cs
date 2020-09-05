@@ -1,18 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Data;
+using OfficeOpenXml;
+
 
 namespace TestForEventRegister.Controllers
 {
     public class BackEventController : Controller
     {
+        dbEventSet db = new dbEventSet();
+
         public ActionResult Event_B()
         {
-            dbEventRegistEntities db = new dbEventRegistEntities();
-            var events = from t in (new dbEventRegistEntities()).tEvent
-                         select t;
+            IQueryable<tEventSet> events = null;
+            string keyword = Request.Form["txtKeyword"];
+            if (string.IsNullOrEmpty(keyword))
+            {
+                events = from p in (new dbEventSet()).tEventSet
+                           select p;
+            }
+
+            else
+            {
+                events = from p in (new dbEventSet()).tEventSet
+                         where p.fEventTitle.Contains(keyword)
+                           select p;
+            }
+
+            //var events = from t in (new dbEventSet()).tEventSet
+            //             select t;
             return View(events);
         }
         public ActionResult Create()
@@ -21,75 +44,41 @@ namespace TestForEventRegister.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(tEvent p)
+        public ActionResult Create(tEventSet p)
         {
-            dbEventRegistEntities db = new dbEventRegistEntities();
-            db.tEvent.Add(p);
-            db.SaveChanges();
-            return RedirectToAction("SetRegistForm2");
-        }
+           if(p.fImage != null)
+            {
+                string photoName = Guid.NewGuid().ToString() + Path.GetExtension(p.fImage.FileName);
+                var path = Path.Combine(Server.MapPath("~/image/event/"), photoName);
+               // var frontpath = "C:/Users/User/Source/Repos/debbieccc/Front_test/eco/mage/event";
+               // p.fImage.SaveAs(frontpath);
+                p.fImage.SaveAs(path);
+                p.fEventImgPath = "../image/event/" + photoName;
+            }                 
 
-        public ActionResult SetRegistForm()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult SetRegistForm(tEventRegister p)
-        {
-            dbEventRegistEntities db = new dbEventRegistEntities();
-            db.tEventRegister.Add(p);
+            db.tEventSet.Add(p);
             db.SaveChanges();
             return RedirectToAction("Event_B");
-        }
-        public ActionResult SetRegistForm2()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult SetRegistForm2(tEventSetRegister p)
-        {
-            tEventSetRegister x = new tEventSetRegister();
-            p.fUserId = 1;
-            p.fnumAttendPeople = 1;
-            p.ferName = 1;
-            p.ferPhone = 1;
-            p.ferEmail = Int32.Parse(Request.Form["email_v"]) ;
-            p.ferGender = Int32.Parse(Request.Form["gender_v"]);
-            p.ferBirthday = Int32.Parse(Request.Form["birthday_v"]);
-            p.ferIdentity = Int32.Parse(Request.Form["idnumber_v"]);
-            p.ferOccupation = Int32.Parse(Request.Form["occupation_v"]);
-            p.ferVeganOrNot = Int32.Parse(Request.Form["veganornot_v"]);
-            p.ferOtherColumn1 = Int32.Parse(Request.Form["other1_v"]);
-            p.ferOtherColumn2 = Request.Form["other2_v"];
-            p.ferOtherColumn3 = Request.Form["other3_v"];
-            p.ferOtherColumn4 = Request.Form["other4_v"];
-            p.ferOtherColumn5 = Request.Form["other5_v"];
-            dbEventRegistEntities db = new dbEventRegistEntities();
-            db.tEventSetRegister.Add(p);
-            db.SaveChanges();
-            return RedirectToAction("Event_B");
-        }
+                                 
+        }       
 
         public ActionResult Edit(int? id)
         {
             if (id == null)
                 return RedirectToAction("Event_B");
 
-            dbEventRegistEntities db = new dbEventRegistEntities();
-            tEvent x = db.tEvent.FirstOrDefault(m => m.fEventId == id);
+         //   dbEventSet db = new dbEventSet();
+            tEventSet x = db.tEventSet.FirstOrDefault(m => m.fEventId == id);
             return View(x);
         }
 
-
         [HttpPost]
-        public ActionResult Edit(tEvent p)
+        public ActionResult Edit(tEventSet p)
         {
             if (string.IsNullOrEmpty(p.fEventTitle))
                 return RedirectToAction("Event_B");
-            dbEventRegistEntities db = new dbEventRegistEntities();
-            tEvent editevent = db.tEvent.FirstOrDefault(m => m.fEventId == p.fEventId);
+        //    dbEventSet db = new dbEventSet();
+            tEventSet editevent = db.tEventSet.FirstOrDefault(m => m.fEventId == p.fEventId);
             if (editevent != null)
             {
                 editevent.fUserId = p.fUserId;
@@ -109,29 +98,150 @@ namespace TestForEventRegister.Controllers
                 editevent.fEventEndDate_R = p.fEventEndDate_R;
                 editevent.fEventEndTime_R = p.fEventEndTime_R;
                 editevent.fRemark = p.fRemark;
+                
                 db.SaveChanges();
             }
             return RedirectToAction("Event_B");
         }
 
-        //public ActionResult EditForRegistert(tEventRegister p)
-        //{          
-        //    dbEventRegistEntities db = new dbEventRegistEntities();
-        //    tEventRegister editRegister = db.tEventRegister.FirstOrDefault(m => m.fEventId == p.fEventId);
-        //    if (editRegister != null)
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    return RedirectToAction("Event_B");
-        //}
-
-
-        public ActionResult RegistertDetail()
+        public ActionResult Delete(int? Id)
         {
-            dbEventRegistEntities db = new dbEventRegistEntities();
-            var RegistertPpl = from t in (new dbEventRegistEntities()).tEventRegister
-                               select t;
-            return View(RegistertPpl);
+            if (Id == null)
+            {
+                return RedirectToAction("Event_B");
+            }
+            tEventSet t = db.tEventSet.FirstOrDefault(x => x.fEventId == Id);
+            if (t != null)
+            {
+                db.tEventSet.Remove(t);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Event_B");
+        }
+
+        public ActionResult RegistertDetail(int? Id)
+        {
+            if (Id == null)
+            {
+                return RedirectToAction("Event_B");
+            }
+            
+            tEventSet set = db.tEventSet.FirstOrDefault(m => m.fEventId == Id);
+            ViewBag.fEventTitle = set.fEventTitle;
+
+            if (set.ferEmail == 1)
+            {
+                ViewBag.ferEmail = 1;
+            }
+            if (set.ferGender == 1)
+            {
+                ViewBag.ferGender = 1;
+            }
+            if (set.ferBirthday == 1)
+            {
+                ViewBag.ferBirthday = 1;
+            }
+            if (set.ferIdentity == 1)
+            {
+                ViewBag.ferIdentity = 1;
+            }
+            if (set.ferOccupation == 1)
+            {
+                ViewBag.ferOccupation = 1;
+            }
+            if (set.ferVeganOrNot == 1)
+            {
+                ViewBag.ferVeganOrNot = 1;
+            }
+            if (set.ferOtherColumn1 != null)
+            {
+                ViewBag.ferOtherColumn1 = set.ferOtherColumn1;
+            }
+            if (set.ferOtherColumn2 != null)
+            {
+                ViewBag.ferOtherColumn2 = set.ferOtherColumn2;
+            }
+            if (set.ferOtherColumn3 != null)
+            {
+                ViewBag.ferOtherColumn3 = set.ferOtherColumn3;
+            }
+            if (set.ferOtherColumn4 != null)
+            {
+                ViewBag.ferOtherColumn4 = set.ferOtherColumn4;
+            }
+            if (set.ferOtherColumn5 != null)
+            {
+                ViewBag.ferOtherColumn5 = set.ferOtherColumn5;
+            }
+            var eventRegisterts = from t in (new dbEventSet()).tEventRegister
+                                  where t.fEventId == Id
+                         select t;
+            return View(eventRegisterts);
+        }
+
+        public ActionResult TestDate()
+        {
+            return View();
+        }
+
+        public ActionResult Export()
+        {
+            //取出要匯出Excel的資料
+            List<tEventRegister> rangerList = db.tEventRegister.ToList();
+
+            //建立Excel
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            ExcelPackage ep = new ExcelPackage();
+
+            //建立第一個Sheet，後方為定義Sheet的名稱
+            ExcelWorksheet sheet = ep.Workbook.Worksheets.Add("FirstSheet");
+
+            int col = 1;    //欄:直的，因為要從第1欄開始，所以初始為1
+
+            //第1列是標題列 
+            //標題列部分，是取得DataAnnotations中的DisplayName，這樣比較一致，
+            //這也可避免後期有修改欄位名稱需求，但匯出excel標題忘了改的問題發生。
+            //取得做法可參考最後的參考連結。
+            sheet.Cells[1, col++].Value = "No.";
+            sheet.Cells[1, col++].Value = "活動編號";
+            sheet.Cells[1, col++].Value = "戶號";
+            sheet.Cells[1, col++].Value = "參加人數";
+            sheet.Cells[1, col++].Value = "姓名";
+            sheet.Cells[1, col++].Value = "聯絡電話";
+            sheet.Cells[1, col++].Value = "電子郵件";
+            sheet.Cells[1, col++].Value = "性別";
+            sheet.Cells[1, col++].Value = "出生年月日";
+            sheet.Cells[1, col++].Value = "身分證字號";
+            sheet.Cells[1, col++].Value = "職業";
+            sheet.Cells[1, col++].Value = "葷食/素食";            
+
+            //資料從第2列開始
+            int row = 2;    //列:橫的
+            foreach (tEventRegister item in rangerList)
+            {
+                col = 1;//每換一列，欄位要從1開始
+                        //指定Sheet的欄與列(欄名列號ex.A1,B20，在這邊都是用數字)，將資料寫入
+                sheet.Cells[row, col++].Value = item.fEventRegisterId;
+                sheet.Cells[row, col++].Value = item.fEventId;
+                sheet.Cells[row, col++].Value = item.fUserId;
+                sheet.Cells[row, col++].Value = item.fnumAttendPeople;
+                sheet.Cells[row, col++].Value = item.ferName;
+                sheet.Cells[row, col++].Value = item.ferPhone;
+                sheet.Cells[row, col++].Value = item.ferEmail;
+                sheet.Cells[row, col++].Value = item.ferGender;
+                sheet.Cells[row, col++].Value = item.ferBirthday;
+                sheet.Cells[row, col++].Value = item.ferIdentity;
+                sheet.Cells[row, col++].Value = item.ferOccupation;
+                sheet.Cells[row, col++].Value = item.ferVeganOrNot;
+                row++;
+            }
+
+            //因為ep.Stream是加密過的串流，故要透過SaveAs將資料寫到MemoryStream，在將MemoryStream使用FileStreamResult回傳到前端
+            MemoryStream fileStream = new MemoryStream();
+            ep.SaveAs(fileStream);
+            ep.Dispose();//如果這邊不下Dispose，建議此ep要用using包起來，但是要記得先將資料寫進MemoryStream在Dispose。
+            fileStream.Position = 0;//不重新將位置設為0，excel開啟後會出現錯誤
+            return File(fileStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "活動報名名單.xlsx");
         }
 
     }

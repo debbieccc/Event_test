@@ -9,7 +9,6 @@ for (var i = 0, max = items.length; i < max; i++) {
 function dragstartHandler(event) {
     console.log(event.target.id);
     event.dataTransfer.setData("text/plain", event.target.id);
-
 }
 
 for (var j = 0; j < zones.length; j++) {
@@ -24,8 +23,8 @@ function creatTextBox(evt) {
     var item = document.querySelector('#' + id);
     evt.preventDefault();
     evt.stopPropagation();
-    evt.target.appendChild(item);
-    item.setAttribute("hidden", "true");
+    //evt.target.appendChild(item.cloneNode(true));
+    //item.setAttribute("hidden", "true");
 
     if (id === "emailbtn") {               
         $("#email").css("display", "block");    
@@ -42,15 +41,11 @@ function creatTextBox(evt) {
     }
     else if (id === "genderbtn") {
         $("#gender").css("display", "block");
-        $("#gender_v").attr("value", "1");
-
-        
+        $("#gender_v").attr("value", "1");        
     }
     else if (id === "veganornotbtn") {
         $("#veganornot").css("display", "block");
-        //$("#veganornot_v").attr("value", "1");
-        var x = document.getElementById("veganornot_v");
-        x.value = 1;
+        $("#veganornot_v").attr("value", "1");    
                 
     }
     else if (id === "occupationbtn") {
@@ -62,3 +57,35 @@ function creatTextBox(evt) {
         $("#other1btn").attr("value", "1");
     }
 }
+
+
+
+$("#emaildelete").click(function () {
+    $("#email").css("display", "none");
+    $("#email_v").attr("value", "0");
+});
+$("#idnumberdelete").click(function () {
+    $("#idnumber").css("display", "none");
+    $("#idnumber_v").attr("value", "0");
+});
+$("#birthdaydelete").click(function () {
+    $("#birthday").css("display", "none");
+    $("#birthday_v").attr("value", "0");
+});
+$("#occupationdelete").click(function () {
+    $("#occupation").css("display", "none");
+    $("#occupation_v").attr("value", "0");
+});
+$("#genderdelete").click(function () {
+    $("#gender").css("display", "none");
+    $("#gender_v").attr("value", "0");
+});
+$("#veganornotdelete").click(function () {
+    $("#veganornot").css("display", "none");
+    $("#veganornot_v").attr("value", "0");
+});
+$("#other1delete").click(function () {
+    $("#other1").css("display", "none");
+    $("#other1_v").attr("value", "0");
+})
+

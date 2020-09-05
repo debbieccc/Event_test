@@ -1,0 +1,8 @@
+﻿#canvas_signature {
+    border: 1px gray solid;
+}
+
+.signaturearea {
+    float: left;
+    width: 500px;
+}

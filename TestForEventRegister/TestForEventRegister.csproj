@@ -51,12 +51,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=5.3.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.3.1\lib\net45\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,34 +133,33 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BackCargoController.cs" />
     <Compile Include="Controllers\BackEventController.cs" />
-    <Compile Include="dbEventRegist.Context.cs">
+    <Compile Include="Controllers\EventSignUpController.cs" />
+    <Compile Include="dbEventSet.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbEventRegist.Context.tt</DependentUpon>
+      <DependentUpon>dbEventSet.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="dbEventRegist.cs">
+    <Compile Include="dbEventSet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbEventRegist.tt</DependentUpon>
+      <DependentUpon>dbEventSet.tt</DependentUpon>
     </Compile>
-    <Compile Include="dbEventRegist.Designer.cs">
+    <Compile Include="dbEventSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbEventRegist.edmx</DependentUpon>
+      <DependentUpon>dbEventSet.edmx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tEvent.cs">
-      <DependentUpon>dbEventRegist.tt</DependentUpon>
-    </Compile>
     <Compile Include="tEventRegister.cs">
-      <DependentUpon>dbEventRegist.tt</DependentUpon>
+      <DependentUpon>dbEventSet.tt</DependentUpon>
     </Compile>
-    <Compile Include="tEventSetRegister.cs">
-      <DependentUpon>dbEventRegist.tt</DependentUpon>
+    <Compile Include="tEventSet.cs">
+      <DependentUpon>dbEventSet.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -163,30 +167,52 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="dbEventRegist.Context.tt">
+    <Content Include="css\cargo_signature.css" />
+    <Content Include="css\jquery.timepicker.css" />
+    <Content Include="css\event.css" />
+    <Content Include="css\event_B.css" />
+    <Content Include="css\frontPage.css" />
+    <Content Include="css\package.css" />
+    <Content Include="css\package_B.css" />
+    <Content Include="dbEventSet.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbEventRegist.edmx</DependentUpon>
-      <LastGenOutput>dbEventRegist.Context.cs</LastGenOutput>
+      <DependentUpon>dbEventSet.edmx</DependentUpon>
+      <LastGenOutput>dbEventSet.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="dbEventRegist.tt">
+    <Content Include="dbEventSet.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbEventRegist.edmx</DependentUpon>
-      <LastGenOutput>dbEventRegist.cs</LastGenOutput>
+      <DependentUpon>dbEventSet.edmx</DependentUpon>
+      <LastGenOutput>dbEventSet.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="fontawesome\all.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\1080x540.png" />
+    <Content Include="image\event\bbq.jpg" />
+    <Content Include="image\event\beef.jpg" />
+    <Content Include="image\event\volunteer.jpg" />
+    <Content Include="image\event\yoga.png" />
+    <Content Include="image\event\yoga_signup.png" />
+    <Content Include="image\package\mail.png" />
+    <Content Include="image\package\mail_received.png" />
+    <Content Include="image\package\package.png" />
+    <Content Include="image\package\package_received.png" />
+    <Content Include="image\tennis.jpg" />
+    <Content Include="js\cargo_signature.js" />
+    <Content Include="js\eventsignup.js" />
+    <Content Include="js\jquery.timepicker.min.js" />
     <Content Include="js\setRegisForm2.js" />
     <Content Include="js\setRegisForm.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="dbEventRegist.edmx">
+    <EntityDeploy Include="dbEventSet.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbEventRegist.Designer.cs</LastGenOutput>
+      <LastGenOutput>dbEventSet.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="dbEventRegist.edmx.diagram">
-      <DependentUpon>dbEventRegist.edmx</DependentUpon>
+    <Content Include="dbEventSet.edmx.diagram">
+      <DependentUpon>dbEventSet.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -210,12 +236,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\BackEvent\Create.cshtml" />
-    <Content Include="Views\BackEvent\Edit.cshtml" />
     <Content Include="Views\BackEvent\Event_B.cshtml" />
+    <Content Include="Views\BackEvent\Create.cshtml" />
+    <Content Include="Views\EventSignUp\Event.cshtml" />
+    <Content Include="Views\BackEvent\Edit.cshtml" />
     <Content Include="Views\BackEvent\RegistertDetail.cshtml" />
-    <Content Include="Views\BackEvent\SetRegistForm.cshtml" />
-    <Content Include="Views\BackEvent\SetRegistForm2.cshtml" />
+    <Content Include="Views\BackEvent\TestDate.cshtml" />
+    <Content Include="Views\BackCargo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

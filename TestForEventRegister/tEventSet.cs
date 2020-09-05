@@ -11,15 +11,10 @@ namespace TestForEventRegister
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class tEvent
+    using System.Web;
+
+    public partial class tEventSet
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tEvent()
-        {
-            this.tEventSetRegister = new HashSet<tEventSetRegister>();
-        }
-    
         public int fEventId { get; set; }
         public string fUserId { get; set; }
         public string fEventTitle { get; set; }
@@ -29,17 +24,30 @@ namespace TestForEventRegister
         public string fEventEndDate { get; set; }
         public string fEventEndTime { get; set; }
         public string fEventImgPath { get; set; }
+        public HttpPostedFileBase fImage { get; set; }
         public string fEventLocation { get; set; }
         public string fEventDescription { get; set; }
-        public Nullable<int> fEventFeeOrFree { get; set; }
+        public string fEventFeeOrFree { get; set; }
         public Nullable<int> fEventFee { get; set; }
         public string fEventFromDay_R { get; set; }
         public string fEventFromTime_R { get; set; }
         public string fEventEndDate_R { get; set; }
         public string fEventEndTime_R { get; set; }
         public string fRemark { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tEventSetRegister> tEventSetRegister { get; set; }
+        public Nullable<int> ferUserId { get; set; }
+        public Nullable<int> fnumAttendPeople { get; set; }
+        public Nullable<int> ferName { get; set; }
+        public Nullable<int> ferPhone { get; set; }
+        public Nullable<int> ferEmail { get; set; }
+        public Nullable<int> ferGender { get; set; }
+        public Nullable<int> ferBirthday { get; set; }
+        public Nullable<int> ferIdentity { get; set; }
+        public Nullable<int> ferOccupation { get; set; }
+        public Nullable<int> ferVeganOrNot { get; set; }
+        public string ferOtherColumn1 { get; set; }
+        public string ferOtherColumn2 { get; set; }
+        public string ferOtherColumn3 { get; set; }
+        public string ferOtherColumn4 { get; set; }
+        public string ferOtherColumn5 { get; set; }
     }
 }

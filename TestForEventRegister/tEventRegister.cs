@@ -22,7 +22,7 @@ namespace TestForEventRegister
         public string ferPhone { get; set; }
         public string ferEmail { get; set; }
         public string ferGender { get; set; }
-        public Nullable<System.DateTime> ferBirthday { get; set; }
+        public string ferBirthday { get; set; }
         public string ferIdentity { get; set; }
         public string ferOccupation { get; set; }
         public Nullable<int> ferVeganOrNot { get; set; }

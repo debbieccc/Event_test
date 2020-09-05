@@ -1,0 +1,56 @@
+﻿
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript" src="~/js/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/css/jquery.timepicker.css" />
+<div>
+    <h2>Step Example</h2>
+    <p>
+        <label for="from">From</label>
+        <input type="text" id="from" name="from" autocomplete="off">
+        <label for="to">to</label>
+        <input type="text" id="to" name="to" autocomplete="off">
+    </p>
+    <p>
+        <input id="stepExample1" type="text" class="time ui-timepicker-input" />
+    </p>
+</div>
+<script>
+
+    var from = $("#from")
+        .datepicker({
+            dateFormat: "yy/mm/dd",
+            minDate: +3,
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+        .on("change", function () {
+            to.datepicker("option", "minDate", getDate(this));
+        }),
+        to = $("#to").datepicker({
+            dateFormat: "yy/mm/dd",
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+            .on("change", function () {
+                from.datepicker("option", "maxDate", getDate(this));
+            });
+
+    function getDate(element) {
+        var date;
+        try {
+            date = $.datepicker.parseDate("yy/mm/dd", element.value);
+        } catch (error) {
+            date = null;
+        }
+
+        return date;
+    }
+
+   var s =  $('#stepExample1').timepicker();
+
+    console.log($('#stepExample1'))
+</script>

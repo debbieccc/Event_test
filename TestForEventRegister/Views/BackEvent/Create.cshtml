@@ -1,177 +1,446 @@
-﻿@model TestForEventRegister.tEvent
+﻿@model TestForEventRegister.tEventSet
 
 @{
     ViewBag.Title = "Create";
 }
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript" src="~/js/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/css/jquery.timepicker.css" />
+
 <style>
-    *{
-        font-family:微軟正黑體;
+    * {
+        font-family: 微軟正黑體;
+    }
+
+    .formitem {
+        margin-bottom: 5px;
+        margin-left: 30px;
+        padding: 5px;
+        border: 1px solid gray;
+        border-radius: 3px;
+        max-width: 130px;
+        background-color: gainsboro;
+    }
+
+    .mt5 {
+        margin-top: 15px;
+    }
+
+    .edittxt {
+        color: blue;
+        font-size: 0.8rem;
+    }
+
+        .edittxt:hover {
+            color: darkblue;
+            cursor: pointer;
+        }
+
+    .btndelete:hover {
+        cursor: pointer;
     }
 </style>
 <h2>新增活動</h2>
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Create", "BackEvent", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group" hidden>
-        <div class="control-label col-md-2">活動編號</div>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.fEventId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.fEventId, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="form-horizontal">
+        <hr />
 
-    <div class="form-group" hidden>
-        <div class="control-label col-md-2">戶號</div>
-        <div class="col-md-10">           
-            @Html.EditorFor(model => model.fUserId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.fUserId, "", new { @class = "text-danger" })
+        <h3>STEP1: 設定活動資訊</h3>
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group" hidden>
+            <div class="control-label col-md-2">活動編號</div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fEventId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fEventId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">活動名稱</div>
-        <div class="col-md-10">
-            <input type="text" class="form-control" name="fEventTitle" required/>
+        <div class="form-group" hidden>
+            <div class="control-label col-md-2">戶號</div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fUserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fUserId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">分類</div>
-        <div class="col-md-10">
-            <select name="fCategory" class = "form-control">
-                <option value="1">運動</option>
-                <option value="2">課程</option>
-                <option value="3">團購</option>
-                <option value="4">聚會</option>
-                <option value="5">招募</option>
-                <option value="6">其他</option>
-            </select>
-           
+        <div class="form-group">
+            <div class="control-label col-md-2">活動名稱</div>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="fEventTitle" required />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">活動開始日</div>
-        <div class="col-md-10">
-            <input type="date" name="fEventFromDay" class = "form-control">
+        <div class="form-group">
+            <div class="control-label col-md-2">分類</div>
+            <div class="col-md-10">
+                <select name="fCategory" class="form-control">
+                    <option value="運動">運動</option>
+                    <option value="課程">課程</option>
+                    <option value="團購">團購</option>
+                    <option value="聚會">聚會</option>
+                    <option value="招募">招募</option>
+                    <option value="其他">其他</option>
+                </select>
+
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">活動開始時間</div>
-        <div class="col-md-10">
-            <input type="time" name="fEventFromTime" class="form-control">
+        <div class="form-group">
+            <div class="control-label col-md-2">活動開始日</div>
+            <div class="col-md-10">
+                <input type="text" id="fEventFromDay" name="fEventFromDay" class="form-control" autocomplete="off">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">活動結束日</div>
-        <div class="col-md-10">
-            <input type="date" name="fEventEndDate" class="form-control">
+        <div class="form-group">
+            <div class="control-label col-md-2">活動開始時間</div>
+            <div class="col-md-10">
+                <input type="text" name="fEventFromTime" id="fEventFromTime" class="form-control time ui-timepicker-input" autocomplete="off">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">活動結束時間</div>
-        <div class="col-md-10">
-            <input type="time" name="fEventEndTime" class="form-control">
+
+        <div class="form-group">
+            <div class="control-label col-md-2">活動結束日</div>
+            <div class="col-md-10">
+                <input type="text" id="fEventEndDate" name="fEventEndDate" class="form-control" autocomplete="off">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">圖片路徑</div>
-        <div class="col-md-10">
-            <input type="file" name="fEventImgPath" >
+        <div class="form-group">
+            <div class="control-label col-md-2">活動結束時間</div>
+            <div class="col-md-10">
+                <input type="text" name="fEventEndTime" id="fEventEndTime" class="form-control time ui-timepicker-input" autocomplete="off">
+              
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">活動地點</div>
-        <div class="col-md-10">
-            <input type="text" class="form-control" name="fEventLocation" required />
+        <div class="form-group">
+            <div class="control-label col-md-2">圖片路徑</div>
+            <div class="col-md-10">
+                <input type="file" name="fImage">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">活動敘述</div>
-        <div class="col-md-10">
-            <textarea class="form-control" name="fEventDescription" required ></textarea>
+        <div class="form-group">
+            <div class="control-label col-md-2">活動地點</div>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="fEventLocation" required />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="control-label col-md-2">是否需付費</div>
-        <div class="col-md-10">
-            <div>
-                 <input type="radio" name="fEventFeeOrFree" value="Fee">付費             
-                 <input type="radio" name="fEventFeeOrFree" value="Free">免費
+        <div class="form-group">
+            <div class="control-label col-md-2">活動敘述</div>
+            <div class="col-md-10">
+                <textarea class="form-control" name="fEventDescription" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">是否為付費活動</div>
+            <div class="col-md-10">
+                <select name="fEventFeeOrFree" class="form-control">
+                    <option value="免費">免費</option>
+                    <option value="付費">付費</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">費用</div>
+            <div class="col-md-10">
+                <input class="form-control" onkeyup="value=value.replace(/[^\d]/g,'') "
+                       　　onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
+                       　　name="fEventFee">               
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2" for="fEventFromDay_R">報名起始日</div>
+            <div class="col-md-10">
+                <input type="text" id="fEventFromDay_R" name="fEventFromDay_R" class="form-control" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">報名起始時間</div>
+            <div class="col-md-10">
+                <input type="time" id="fEventFromTime_R" name="fEventFromTime_R" class="form-control" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2" for="fEventEndDate_R">報名截止日</div>
+            <div class="col-md-10">
+                <input type="text" id="fEventEndDate_R" name="fEventEndDate_R" class="form-control" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">報名截止時間</div>
+            <div class="col-md-10">
+                <input type="time" id="fEventEndTime_R" name="fEventEndTime_R" class="form-control" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">備註</div>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="fRemark" />
+            </div>
+        </div>
+
+        <hr />
+        <h3>STEP2: 設定報名資訊</h3>
+        <br />
+        <div class="row">
+
+            <div class="col-lg-7 form-horizontal zone">
+                <h4><b>-活動報名表-</b></h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div class="form-group">
+                    <div class="control-label col-md-2"><span class="text-danger">*</span>戶號</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferUserId" value="1" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-md-2"><span class="text-danger">*</span>參加人數</div>
+                    <div class="col-md-10">
+                        <input type="text" name="1" class="form-control" />
+                        <input type="hidden" name="fnumAttendPeople" value="1" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-md-2"><span class="text-danger">*</span>姓名</div>
+                    <div class="col-md-10">
+                        <input type="text" name="1" class="form-control" />
+                        <input type="hidden" name="ferName" value="1" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-md-2"><span class="text-danger">*</span>連絡電話</div>
+                    <div class="col-md-10">
+                        <input type="text" name="1" class="form-control" />
+                        <input style="display: inline-block; " type="hidden" name="ferPhone" value="1" class="form-control" />
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group" id="email" style="display:none">
+                    <div class="control-label col-md-2"> <span class="text-danger btndelete" id="emaildelete"> <b> X </b></span> 電子郵件</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferEmail" id="email_v" value="0" />
+                    </div>
+
+                </div>
+
+                <div class="form-group" id="gender" style="display:none">
+                    <div class="control-label col-md-2"> <span class="text-danger btndelete" id="genderdelete"> <b> X </b></span> 性別</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferGender" id="gender_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="birthday" style="display:none">
+                    <div class="control-label col-md-2"><span class="text-danger btndelete" id="birthdaydelete"> <b> X </b></span>  出生年月日</div>
+                    <div class="col-md-10">
+                        <input type="date" class="form-control" />
+                        <input type="hidden" name="ferBirthday" id="birthday_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="idnumber" style="display:none">
+                    <div class="control-label col-md-2"><span class="text-danger btndelete" id="idnumberdelete"> <b> X </b></span> 身份證字號</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferIdentity" id="idnumber_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="occupation" style="display:none">
+                    <div class="control-label col-md-2"> <span class="text-danger btndelete" id="occupationdelete"> <b> X </b></span> 職業</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferOccupation" id="occupation_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="veganornot" style="display:none" value="0" name="veganornot_v">
+                    <div class="control-label col-md-2"><span class="text-danger btndelete" id="veganornotdelete"> <b> X </b></span>  葷食/素食</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferVeganOrNot" id="veganornot_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="other1" style="display:none">
+                    <div class="control-label col-md-2">
+                        <span class="text-danger btndelete" id="other1delete"> <b> X </b></span>
+                        <label class="edittxt">編輯</label>
+                        自訂欄位
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferOtherColumn1" id="other1_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="other2" style="display:none">
+                    <div class="control-label col-md-2">
+                        <span class="text-danger btndelete" id="other2delete"> <b> X </b></span>
+                        <label class="edittxt">編輯</label>
+                        自訂欄位
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferOtherColumn2" id="other2_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="other3" style="display:none">
+                    <div class="control-label col-md-2">
+                        <span class="text-danger btndelete" id="other3delete"> <b> X </b></span>
+                        <label class="edittxt">編輯</label>
+                        自訂欄位
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferOtherColumn3" id="other3_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="other4" style="display:none">
+                    <div class="control-label col-md-2">
+                        <span class="text-danger btndelete" id="other4delete"> <b> X </b></span>
+                        <label class="edittxt">編輯</label>
+                        自訂欄位
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferOtherColumn4" id="other4_v" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="other5" style="display:none">
+                    <div class="control-label col-md-2">
+                        <span class="text-danger btndelete" id="other5delete"> <b> X </b></span>
+                        <label class="edittxt">編輯</label>
+                        自訂欄位
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" />
+                        <input type="hidden" name="ferOtherColumn5" id="other5_v" value="0" />
+                    </div>
+                </div>
             
+
+            </div>
+
+            <div class="col-lg-4 form-horizontal zone">
+
+                <h4><b>-自訂欄位- </b><label class="text-danger" style="font-size:10px"> 拖曳下列您需要的選項至左側報名表內</label></h4>
+
+                <div class="ml-1">
+                    <div style="cursor:pointer" draggable="true" class="formitem " id="emailbtn"> <i class="fa fa-plus"></i> + 電子郵件</div>
+                    <div style="cursor:pointer" draggable="true" class="formitem " id="genderbtn"> <i class="fa fa-plus"></i>+ 性別</div>
+                    <div style="cursor:pointer" draggable="true" class="formitem " id="birthdaybtn"> <i class="fa fa-plus"></i>+ 出生年月日</div>
+                    <div style="cursor:pointer" draggable="true" class="formitem " id="idnumberbtn"> <i class="fa fa-plus"></i>+ 身分證字號</div>
+                    <div style="cursor:pointer" draggable="true" class="formitem " id="occupationbtn"> <i class="fa fa-plus"></i> + 職業</div>
+                    <div style="cursor:pointer" draggable="true" class="formitem " id="veganornotbtn"> <i class="fa fa-plus"></i>+ 葷/素食</div>
+                    <div style="cursor:pointer" draggable="true" class="formitem " id="otherbtn"> <i class="fa fa-plus"></i>+ 自訂</div>
+                </div>
+
+
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 ">
+                <input type="submit" value="確定新增" class="btn btn-default" />
             </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="control-label col-md-2">費用</div>
-        <div class="col-md-10">
-            <input class="form-control" onkeyup="value=value.replace(/[^\d]/g,'') "
-                   　　onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
-                   　　name="fEventFee">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="control-label col-md-2">報名起始日</div>
-        <div class="col-md-10">
-            <input type="time" name="fEventFromDay_R" class="form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="control-label col-md-2">報名起始時間</div>
-        <div class="col-md-10">
-            <input type="date" name="fEventFromTime_R" class="form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="control-label col-md-2">報名截止日</div>
-        <div class="col-md-10">
-            <input type="time" name="fEventEndDate_R" class="form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="control-label col-md-2">報名截止時間</div>
-        <div class="col-md-10">
-            <input type="date" name="fEventEndTime_R" class="form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="control-label col-md-2">備註</div>
-        <div class="col-md-10">
-            <input type="text" class="form-control" name="fRemark" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-            <input type="submit" value="下一步" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
+
 
 <div>
     @Html.ActionLink("取消", "Event_B")
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+<script src="~/js/setRegisForm2.js"></script>
+<script>
+    $(function () {
+        var fEventFromDay = $("#fEventFromDay").datepicker({
+            dateFormat: "yy-mm-dd",
+            minDate: "+3d",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+            .on("change", function () {
+                fEventEndDate.datepicker("option", "minDate", getDate(this));
+                fEventEndDate_R.datepicker("option", "maxDate", getDate(this));
+            });
+        var fEventEndDate = $("#fEventEndDate").datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+            .on("change", function () {
+                fEventFromDay.datepicker("option", "maxDate", getDate(this));
+            });
+
+        var fEventFromDay_R = $("#fEventFromDay_R").datepicker({
+            dateFormat: "yy-mm-dd",
+            minDate: "today",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+
+        var fEventEndDate_R = $("#fEventEndDate_R").datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            numberOfMonths: 1
+        })
+
+        function getDate(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate("yy/mm/dd", element.value);
+            } catch (error) {
+                date = null;
+            }
+            return date;
+        }
+     
+    });
+
+
+</script>
