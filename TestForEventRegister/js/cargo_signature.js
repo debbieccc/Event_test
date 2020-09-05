@@ -39,12 +39,17 @@ signature.addEventListener("mousemove", function (event) {
 //結束畫圖
 signature.addEventListener("mouseup", function (event) {
     flag = false;
+ 
 }, false);
 
 //儲存
 document.querySelector("#saveSignature").addEventListener("click", function () {
     var signatureImg = document.querySelector("#signatureImg");
     signatureImg.src = signature.toDataURL("image/png");
+    context.clearRect(0, 0, signature.width, signature.height);
+        alert("儲存成功");
+    $('#btnclose').click();
+    console.log($("#btnclose"))
 }, false);
 
 
