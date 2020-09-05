@@ -1,0 +1,139 @@
+﻿@model IEnumerable<TestForEventRegister.tEventSet>
+
+@{
+    ViewBag.Title = "Event_B";
+}
+
+@functions{
+    public string formatDate(string date)
+    {
+        return date.Substring(0, 4) + "/" +
+            date.Substring(4, 2) + "/" +
+            date.Substring(6, 2) + " "; 
+           
+    }
+
+    public string formatTime(string time)
+    {
+        return time.Substring(0, 2) + ":" +
+            time.Substring(2, 2) ; 
+         
+    }
+}
+
+
+<h2>社區活動管理</h2>
+<br />
+
+<p>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="margin-left:15px">
+            <div class="form-group d-flex">
+                <input type="text" name="txtKeyword" />
+                <input type="submit" value="搜尋" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+</p>
+<p>
+    <i class="fa fa-plus"></i> @Html.ActionLink("新增活動", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            No.
+        </th>
+        <th>
+            活動發起人
+        </th>
+        <th>
+            活動名稱
+        </th>
+        <th>
+            分類
+        </th>
+        <th>
+            活動開始日期
+        </th>
+
+        <th>
+            活動結束日期
+        </th>
+
+        <th>
+            地點
+        </th>
+
+        <th>
+            是否付費
+        </th>
+        <th>
+            活動費用
+        </th>
+        <th>
+            報名起始日
+        </th>
+
+        <th>
+            報名結束日
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCategory)
+            </td>
+            <td>
+                @formatDate(item.fEventFromDay)  @formatTime(item.fEventFromTime)
+            </td>
+
+            <td>
+                @formatDate(item.fEventEndDate)  @formatTime(item.fEventEndTime)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventLocation)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventFeeOrFree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fEventFee)
+            </td>
+            <td>
+                @formatDate(item.fEventFromDay_R)  @formatTime(item.fEventFromTime_R)
+            </td>
+
+            <td>
+                @formatDate(item.fEventEndDate_R)  @formatTime(item.fEventEndTime_R)
+            </td>
+
+            <td>
+                @Html.ActionLink("編輯", "Edit", new { id = item.fEventId }) |
+                @Html.ActionLink("報名名單", "RegistertDetail", new { id = item.fEventId }) |
+                @Html.ActionLink("刪除", "Delete", new { id = item.fEventId }, new { onClick = "return confirm('是否確定刪除?')" })
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,129 @@
+﻿@model IEnumerable<TestForEventRegister.tEventRegister>
+
+@{
+    ViewBag.Title = "RegistertDetail";
+}
+
+<h2>RegistertDetail</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fEventRegisterId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fEventId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fnumAttendPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferGender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferBirthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferIdentity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferOccupation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferVeganOrNot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferOtherColumn1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferOtherColumn2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferOtherColumn3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferOtherColumn4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ferOtherColumn5)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fEventRegisterId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fEventId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fnumAttendPeople)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferGender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferBirthday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferIdentity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferOccupation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferVeganOrNot)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferOtherColumn1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferOtherColumn2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferOtherColumn3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferOtherColumn4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ferOtherColumn5)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
