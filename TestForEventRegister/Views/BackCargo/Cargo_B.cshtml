@@ -15,6 +15,33 @@
 <link href="~/style/cargo_signature.css" rel="stylesheet" />
 <h2>郵務管理</h2>
 
+<div class="modal fade " id="signaturebox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="position:initial">
+        @*modal-dialog*@
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">收件者簽名</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="signaturearea">
+                    <canvas id="canvas_signature" width="760" height="450"></canvas>
+                    <br />
+                    <input type="button" value="清除" id="clearSignature" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnclose" data-dismiss="modal">關閉</button>
+
+                <button type="button" id="saveSignature" class="btn btn-primary">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <p>
     <i class="fa fa-plus"></i> @Html.ActionLink("新增", "Create")
@@ -54,66 +81,43 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.fCargoId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fShipCompany)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fSender)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fUserId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fUserName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fCargoType)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fArriveDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fReceiveOrNot)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCargoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fShipCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fSender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCargoType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fArriveDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fReceiveOrNot)
+            </td>
 
-    <td>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signaturebox">
-            簽收
-        </button> 
-        <div class="modal fade " id="signaturebox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="position:initial">
-                @*modal-dialog*@
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">收件者簽名</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="signaturearea">
-                            <canvas id="canvas_signature" width="760" height="450"></canvas>
-                            <br />
-                            <input type="button" value="清除" id="clearSignature" />
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="btnclose" data-dismiss="modal">關閉</button>
-
-                        <button type="button" id="saveSignature" class="btn btn-primary">儲存</button>
-                    </div>
-                </div>
-            </div>
-        </div>｜
-        @Html.ActionLink("編輯", "Edit", new { id = item.fCargoId })
-    </td>
-</tr>
+            <td>
+                @Html.ActionLink("簽收", "gosign", new { id = item.fCargoId })
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signaturebox">
+                    簽收
+                </button>
+                <div>
+                    <img id="@ViewBag.imgid" />
+                </div>｜
+                @Html.ActionLink("編輯", "Edit", new { id = item.fCargoId })
+            </td>
+        </tr>
 
     }
 
@@ -122,9 +126,7 @@
 
 <!-- Modal -->
 
-<div>
-    <img id="signatureImg" />
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

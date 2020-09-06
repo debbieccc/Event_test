@@ -49,7 +49,6 @@ document.querySelector("#saveSignature").addEventListener("click", function () {
     context.clearRect(0, 0, signature.width, signature.height);
         alert("儲存成功");
     $('#btnclose').click();
-    console.log($("#btnclose"))
 }, false);
 
 

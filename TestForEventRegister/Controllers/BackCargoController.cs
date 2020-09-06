@@ -15,6 +15,8 @@ namespace TestForEventRegister.Controllers
             var package = from t in (new dbEventSet()).tCargo
                           select t;
             return View(package);
+
+            
         }
 
         public ActionResult Index()
