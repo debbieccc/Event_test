@@ -9,8 +9,18 @@ namespace TestForEventRegister.Controllers
     public class BackCargoController : Controller
     {
         // GET: BackCargo
-        public ActionResult Index()
+        public ActionResult Cargo_B()
         {
+            dbEventSet db = new dbEventSet();
+            var package = from t in (new dbEventSet()).tCargo
+                          select t;
+            return View(package);
+
+            
+        }
+
+        public ActionResult Index()
+        {            
             return View();
         }
     }

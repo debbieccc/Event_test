@@ -47,6 +47,7 @@ document.querySelector("#saveSignature").addEventListener("click", function () {
     var signatureImg = document.querySelector("#signatureImg");
     signatureImg.src = signature.toDataURL("image/png");
     context.clearRect(0, 0, signature.width, signature.height);
+    alert("儲存成功");
     $('#btnclose').click();
 }, false);
 

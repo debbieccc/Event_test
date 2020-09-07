@@ -27,5 +27,6 @@ namespace TestForEventRegister
     
         public virtual DbSet<tEventRegister> tEventRegister { get; set; }
         public virtual DbSet<tEventSet> tEventSet { get; set; }
+        public virtual DbSet<tCargo> tCargo { get; set; }
     }
 }

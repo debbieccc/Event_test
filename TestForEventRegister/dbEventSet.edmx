@@ -5,6 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TestForEventRegisterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tCargo">
+          <Key>
+            <PropertyRef Name="fCargoId" />
+          </Key>
+          <Property Name="fCargoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fArriveDate" Type="nvarchar" MaxLength="30" />
+          <Property Name="fShipCompany" Type="nvarchar" MaxLength="20" />
+          <Property Name="fCargoNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="fCargoType" Type="nvarchar" MaxLength="20" />
+          <Property Name="fSender" Type="nvarchar" MaxLength="20" />
+          <Property Name="fUserId" Type="nvarchar" MaxLength="10" />
+          <Property Name="fUserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="fReceiveOrNot" Type="int" />
+          <Property Name="fRemark" Type="nvarchar" MaxLength="50" />
+          <Property Name="fSignaturePath" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="tEventRegister">
           <Key>
             <PropertyRef Name="fEventRegisterId" />
@@ -66,6 +82,7 @@
           <Property Name="ferOtherColumn5" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="TestForEventRegisterModelStoreContainer">
+          <EntitySet Name="tCargo" EntityType="Self.tCargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tEventRegister" EntityType="Self.tEventRegister" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tEventSet" EntityType="Self.tEventSet" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -76,6 +93,7 @@
         <EntityContainer Name="dbEventSet" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tEventRegister" EntityType="TestForEventRegisterModel.tEventRegister" />
           <EntitySet Name="tEventSet" EntityType="TestForEventRegisterModel.tEventSet" />
+          <EntitySet Name="tCargo" EntityType="TestForEventRegisterModel.tCargo" />
         </EntityContainer>
         <EntityType Name="tEventRegister">
           <Key>
@@ -136,6 +154,22 @@
           <Property Name="ferOtherColumn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ferOtherColumn4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ferOtherColumn5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tCargo">
+          <Key>
+            <PropertyRef Name="fCargoId" />
+          </Key>
+          <Property Name="fCargoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fArriveDate" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="fShipCompany" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fCargoNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fCargoType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fSender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fUserId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fUserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fReceiveOrNot" Type="Int32" />
+          <Property Name="fRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fSignaturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -202,6 +236,23 @@
                 <ScalarProperty Name="fEventTitle" ColumnName="fEventTitle" />
                 <ScalarProperty Name="fUserId" ColumnName="fUserId" />
                 <ScalarProperty Name="fEventId" ColumnName="fEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCargo">
+            <EntityTypeMapping TypeName="TestForEventRegisterModel.tCargo">
+              <MappingFragment StoreEntitySet="tCargo">
+                <ScalarProperty Name="fSignaturePath" ColumnName="fSignaturePath" />
+                <ScalarProperty Name="fRemark" ColumnName="fRemark" />
+                <ScalarProperty Name="fReceiveOrNot" ColumnName="fReceiveOrNot" />
+                <ScalarProperty Name="fUserName" ColumnName="fUserName" />
+                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+                <ScalarProperty Name="fSender" ColumnName="fSender" />
+                <ScalarProperty Name="fCargoType" ColumnName="fCargoType" />
+                <ScalarProperty Name="fCargoNumber" ColumnName="fCargoNumber" />
+                <ScalarProperty Name="fShipCompany" ColumnName="fShipCompany" />
+                <ScalarProperty Name="fArriveDate" ColumnName="fArriveDate" />
+                <ScalarProperty Name="fCargoId" ColumnName="fCargoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
