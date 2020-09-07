@@ -169,7 +169,7 @@
           <Property Name="fUserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="fReceiveOrNot" Type="Int32" />
           <Property Name="fRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="fSignaturePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fSignaturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
